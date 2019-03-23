@@ -26,7 +26,8 @@ public class LoginFilter implements Filter {
 		String uri = request.getRequestURI() ;
 		System.out.println("filter url : " + uri);
 		//是否需要过滤
-		boolean needFilter = isNeedFilter(uri) ;
+		String contextPath = request.getContextPath() ;
+		boolean needFilter = isNeedFilter(uri,contextPath) ;
 		if(!needFilter) {//不需要过滤直接传给下一个过滤器
 			filterChina.doFilter(servletReq, servletResp);
 		}else {//需要过滤
@@ -40,14 +41,16 @@ public class LoginFilter implements Filter {
 					response.getWriter().write(this.NO_LOGIN);
 				}else {
 					//重定向到登录页(需要在static问价夹下建立此html文件)
-					response.sendRedirect(request.getContextPath()+"/login.html");
+					response.sendRedirect(contextPath+"/login.html");
 				}
 				return ;
 			}
 		}
 	}
 	
-	private boolean isNeedFilter(String uri) {
+	private boolean isNeedFilter(String uri,String contextPath) {
+		uri = uri.substring(contextPath.length(), uri.length()) ;
+		System.out.println("uri : " + uri);
 		for(String includeUrl : includeUrls) {
 			if(includeUrl.equals(uri)) {
 				return false;

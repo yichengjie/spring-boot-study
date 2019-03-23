@@ -1,7 +1,7 @@
 server:
-  port: 8081 #修改默认端口号，默认为8080
+  port: 8080 #修改默认端口号，默认为8080
   servlet:
-    context-path: /springboot #修改默认contextPath,默认为/
+    context-path: / #修改默认contextPath,默认为/
 
 spring:
   thymeleaf:

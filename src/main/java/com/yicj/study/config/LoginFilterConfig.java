@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import com.yicj.study.filters.LoginFilter;
 
 //@Configuration
-public class LogigFilterConfig {
+public class LoginFilterConfig {
 	
 	//@Bean
 	public FilterRegistrationBean<Filter> loginFilterRegistration() {

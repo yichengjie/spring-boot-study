@@ -15,7 +15,7 @@ public class LoginFilter implements Filter {
 	//表示符：表示当前用户未登录（可以根据自己项目的需要改为json样式）
 	String NO_LOGIN = "您还未登录" ;
 	//不需要登录就可以访问的路径(比如:注册登录等)
-	String [] includeUrls = new String [] {"/login","register","/login.html"} ;
+	String [] includeUrls = new String [] {"/user/login","/user/register","/login.html"} ;
 	@Override
 	public void doFilter(ServletRequest servletReq, ServletResponse servletResp, FilterChain filterChina)
 			throws IOException, ServletException {

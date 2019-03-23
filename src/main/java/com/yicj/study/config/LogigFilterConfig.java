@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Configuration;
 
 import com.yicj.study.filters.LoginFilter;
 
-@Configuration
+//@Configuration
 public class LogigFilterConfig {
 	
-	@Bean
+	//@Bean
 	public FilterRegistrationBean<Filter> loginFilterRegistration() {
 		//新建过滤器注册类
 		FilterRegistrationBean<Filter> registration

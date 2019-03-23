@@ -1,7 +1,8 @@
-package com.yicj.study.springbootstudy;
+package com.yicj.study;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 
 @SpringBootApplication
 public class SpringBootStudyApplication {

@@ -1,0 +1,13 @@
+server:
+  port: 8081 #修改默认端口号，默认为8080
+  servlet:
+    context-path: /springboot #修改默认contextPath,默认为/
+
+spring:
+  thymeleaf:
+    cache: false #开发过程中建议关闭cache
+    encoding: UTF-8 #thymeleaf编码
+    suffix: .html #thymeleaf后缀
+    servlet:
+      content-type: text/html
+      

@@ -1,8 +1,8 @@
 package com.yicj.study.controller;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.yicj.study.domain.User;
 
 @RestController
@@ -21,9 +21,13 @@ public class UserController {
         return user;
     }
     
-    @RequestMapping("/hello")
-    public String hello() {
-    	
-    	return "hello" ;
+    @RequestMapping("/login")
+    public String login(String name ,String pwd,HttpSession session) {
+    	if("yicj".equals(name) && "123".equals(pwd)) {
+    		session.setAttribute("user", name);
+    		return "登录成功" ;
+    	}else {
+    		return "用户名或密码错误" ;
+    	}
     }
 }

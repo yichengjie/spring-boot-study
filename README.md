@@ -1,2 +1,2 @@
 # spring-boot-study
-spring-boot study record
+spring-boot study records

@@ -11,6 +11,11 @@ public class SpringBootStudyApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		
 	}
-
+	
+    @Test
+    public void testOne(){
+        System.out.println("test hello 1");
+    }
 }

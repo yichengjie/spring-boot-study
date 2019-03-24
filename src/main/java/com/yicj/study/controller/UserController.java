@@ -10,15 +10,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.yicj.study.domain.User;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping(value="/users")
+@Api
 public class UserController {
 	static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
     
@@ -62,8 +66,14 @@ public class UserController {
         return "success";
     }
     
-    @RequestMapping("/login")
-    public String login(String name ,String pwd,HttpSession session) {
+    @ApiOperation(value="用户登录", notes="根据用户名密码登录系统")
+    @ApiParam("电话号码，必选")
+    @ApiImplicitParams({
+    	@ApiImplicitParam(paramType = "query" ,name = "name", value = "用户名", required = true, dataType = "String"),
+    	@ApiImplicitParam(paramType = "query", name = "pwd", value = "密码", required = true, dataType = "String")
+    })
+    @RequestMapping(value="/login",method=RequestMethod.GET)
+    public String login(@RequestParam String name ,@RequestParam String pwd,HttpSession session) {
     	if("yicj".equals(name) && "123".equals(pwd)) {
     		session.setAttribute("user", name);
     		return "登录成功" ;

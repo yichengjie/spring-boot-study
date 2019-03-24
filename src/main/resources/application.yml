@@ -19,4 +19,7 @@ spring:
 #    driver-class-name: com.mysql.jdbc.Driver
 #    username: root
 #    password: root
+logging:
+  config: classpath:logback.xml
+  #path: E:\opt\applog
    

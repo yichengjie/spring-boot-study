@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contactList id="0">
+    <contact id="001" class="style" name="lisi">
+        <name>张三</name>
+        <age>20</age>
+        <phone>134222223333</phone>
+        <email>zhangsan@qq.com</email>
+        <qq>432221111</qq>
+    </contact>
+    <contact id="002">
+        <name>李四</name>
+        <age>20</age>
+        <phone>134222225555</phone>
+        <email>lisi@qq.com</email>
+        <qq>432222222</qq>
+    </contact>
+    <contactTwo>
+        <name>王五</name>
+        <age>32</age>
+        <phone>465431341</phone>
+        <emali>af@qq.com</emali>
+        <qq>46164694</qq>
+    </contactTwo>
+    <test>测试</test>
+    <test>其他用途</test>
+</contactList>

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import com.yicj.study.tuple.ThreeTuple;
 import com.yicj.study.tuple.Tuples;
 import com.yicj.study.tuple.TwoTuple;
 
@@ -13,6 +14,63 @@ import ch.ethz.ssh2.Session;
 import ch.ethz.ssh2.StreamGobbler;
 
 public class SSH2 {
+	
+    public static ThreeTuple<Boolean,Connection,String> login(String hostname,String username,String password) {
+    	Connection conn = new Connection(hostname);
+    	boolean flag = true;
+    	String msg = "" ;
+        try {
+			conn.connect();
+			boolean isconn = conn.authenticateWithPassword(username, password);//使用用户名和密码校验
+	        if(!isconn){
+	        	flag = false;
+	        	msg = "用户名称或者是密码不正确" ;
+	        }
+		} catch (IOException e) {
+			flag = false;
+			msg = e.getMessage();
+		}
+        return Tuples.tuple(flag, conn, msg) ;
+    }
+	
+    /**
+     * 执行命令
+     * @param conn 服务器连接
+     * @param cmd  待执行的命令
+     * @param closeConn 是否关闭连接
+     * @return
+     */
+    public static TwoTuple<Boolean, String> execmd(Connection conn, String cmd,boolean closeConn) {
+        String result="";
+        boolean flag = true;
+        String msg = "" ;
+        Session ssh = null ;
+        try {
+        	ssh = conn.openSession();
+            //使用多个命令用分号隔开
+            ssh.execCommand(cmd);
+            //只允许使用一行命令，即ssh对象只能使用一次execCommand这个方法，多次使用则会出现异常
+            result=processStdout(ssh.getStdout(),"utf-8");
+            //如果为得到标准输出为空，说明脚本执行出错了
+            if(isBlank(result)){
+            	flag = false;
+                result=processStdout(ssh.getStderr(),"utf-8");
+            }
+		} catch (IOException e) {
+			flag = false;
+			result = e.getMessage();
+		}finally {
+			if(ssh!=null) {
+				ssh.close();
+			}
+			if(closeConn && conn!=null) {
+				conn.close();
+			}
+		}
+        return Tuples.tuple(flag, msg) ;
+    }
+    
+
 	private static String processStdout(InputStream in, String charset) throws IOException{
         InputStream  stdout = new StreamGobbler(in);
         StringBuffer buffer = new StringBuffer();;
@@ -30,46 +88,6 @@ public class SSH2 {
         }
         return buffer.toString();
     }
-	
-	
-	// String cmd="shutdownUpdateServer.sh";
-    public static TwoTuple<Boolean, String> execmd(String cmd) throws IOException {
-        String hostname = "机器ip";
-        String username = "用户名";
-        String password = "密码";
-        String result="";
-        boolean flag = false;
-        String msg = "" ;
-        //指明连接主机的IP地址
-        Connection conn = new Connection(hostname);
-        Session ssh = null;
-        try {
-            //连接到主机
-            conn.connect();
-            //使用用户名和密码校验
-            boolean isconn = conn.authenticateWithPassword(username, password);
-            if(!isconn){
-            	msg = "用户名称或者是密码不正确";
-            }else {
-            	ssh = conn.openSession();
-                //使用多个命令用分号隔开
-                ssh.execCommand(cmd);
-                //只允许使用一行命令，即ssh对象只能使用一次execCommand这个方法，多次使用则会出现异常
-                result=processStdout(ssh.getStdout(),"utf-8");
-                //如果为得到标准输出为空，说明脚本执行出错了
-                if(isBlank(result)){
-                    result=processStdout(ssh.getStderr(),"utf-8");
-                }else {
-                	flag = true;
-                }
-            }
-            return Tuples.tuple(flag, msg) ;
-        } finally {
-        	//连接的Session和Connection对象都需要关闭
-        	ssh.close();
-            conn.close();
-        }
-    }
     
     public static boolean isBlank(String result) {
     	if(result==null || result.trim().length() ==0) {
@@ -78,15 +96,14 @@ public class SSH2 {
     	return false;
     }
     
-    
-    public static void startup() throws IOException {
-   	    String cmd="sh /startUpdateServer.sh";
-   	    TwoTuple<Boolean, String> ret =  SSH2.execmd(cmd);
-   	    System.out.printf("%s | %s %n",ret.first,ret.second);
-   } 
-    
     public static void main(String[] args) throws IOException {
-    	//shutdown(); 
-    	//startup();
+    	String  hostname = "" ;
+    	String username = "" ;
+    	String password = "";
+    	String cmd = "" ;
+    	ThreeTuple<Boolean, Connection, String> ret = SSH2.login(hostname, username, password);
+    	Connection conn = ret.second ;
+    	TwoTuple<Boolean, String> execmd = SSH2.execmd(conn, cmd, true);
+    	System.out.printf("%s | %s %n",execmd.first,execmd.second);
 	}
 }

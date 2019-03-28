@@ -1,4 +1,4 @@
-package com.yicj.study.springbootstudy;
+package com.yicj.study;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -7,11 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class SpringBootStudyApplication {
-	static Logger logger = LoggerFactory.getLogger(SpringBootStudyApplication.class) ;
+public class Application {
+	static Logger logger = LoggerFactory.getLogger(Application.class) ;
 	public static void main(String[] args) {
 		logger.info("----ready to start spring boot -------");
-		SpringApplication.run(SpringBootStudyApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
-
 }

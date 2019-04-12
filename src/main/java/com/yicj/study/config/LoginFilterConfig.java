@@ -2,10 +2,8 @@ package com.yicj.study.config;
 
 import javax.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-import com.yicj.study.filters.LoginFilter;
+import com.yicj.study.web.filters.LoginFilter;
 
 //@Configuration
 public class LoginFilterConfig {

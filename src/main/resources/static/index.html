@@ -19,7 +19,7 @@
     //判断当前浏览器是否支持WebSocket
     if ('WebSocket' in window) {
         // 不带参数的写法
-        websocket = new WebSocket("ws://localhost:8080/websocket");
+        websocket = new WebSocket("ws://localhost:8080/myWebsocket");
         // 通过路径传递参数的方法（服务端采用第一种方法"@ServerEndpoint"实现）
         //websocket = new WebSocket("ws://localhost:8080/testWebsocket/23/Lebron");
         // 通过类似GET请求方式传递参数的方法（服务端采用第二种方法"WebSocketHandler"实现）

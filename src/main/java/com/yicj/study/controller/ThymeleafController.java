@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,13 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/thymeleaf")
 public class ThymeleafController {
 	
-	@RequestMapping("hello")
+	@GetMapping("hello")
 	public String ceshi(HttpServletRequest req) {
 		req.setAttribute("name", "hello world");
 		return "thymeleaf";  
 	}
 	
-	@RequestMapping("/hello1")
+	@GetMapping("/hello1")
 	public String hello1(Map<String, Object> map){
 		//ModelAndView
 		map.put("name", "Cay");

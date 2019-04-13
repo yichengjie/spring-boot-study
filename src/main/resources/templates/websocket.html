@@ -35,7 +35,7 @@
     var commWebSocket;
     if ("WebSocket" in window)
     {
-        webSocket = new WebSocket("ws://localhost:8080/websocket/"+document.getElementById('username').value);
+        webSocket = new WebSocket("ws://192.168.99.129:8080/websocket/"+document.getElementById('username').value);
 
         //连通之后的回调事件
         webSocket.onopen = function()

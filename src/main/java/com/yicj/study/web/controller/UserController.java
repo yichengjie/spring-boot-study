@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 @RestController
-@RequestMapping(value="/users")
+@RequestMapping("/users")
 @Api
 public class UserController {
 	static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());

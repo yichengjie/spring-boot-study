@@ -1,14 +1,18 @@
 package com.yicj.study.web.controller;
 
+import com.yicj.study.common.Init;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+@Init("test")
 @Controller
 public class HelloController {
 	Logger logger = LoggerFactory.getLogger(HelloController.class) ;
+
+	@Init("test-home")
 	@GetMapping("/")
 	@ResponseBody
 	String home() {

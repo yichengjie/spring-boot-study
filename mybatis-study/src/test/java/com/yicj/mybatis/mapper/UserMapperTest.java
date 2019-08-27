@@ -85,6 +85,29 @@ public class UserMapperTest {
 	public void testDeleteUserById() {
 		this.userMapper.deleteUserById("1");
 	}
-	 
 	
+	@Test
+	public void testQueryUserListByName1() {
+		List<User> users = this.userMapper.queryUserListByName1("hj") ;
+		users.forEach(user->System.out.println(user));
+	}
+	
+	@Test
+	public void testQueryUserListByNameOrAge() {
+		List<User> users = this.userMapper.queryUserListByNameOrAge(null, 22);
+		users.stream().forEach(user->System.out.println(user));
+	}
+	
+	@Test
+	public void testQueryUserListByNameAndAge() {
+		List<User> users = this.userMapper.queryUserListByNameAndAge("鹏程", 22);
+		users.forEach(user->System.out.println(user));
+	}
+	
+	@Test
+	public void testQueryUserListByIds() {
+		List<User> users = this.userMapper.queryUserListByIds(new String []{"1","2"});
+		users.forEach(user-> System.out.println(user));
+	}
+	 
 }

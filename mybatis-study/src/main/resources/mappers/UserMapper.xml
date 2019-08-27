@@ -94,5 +94,54 @@
      <delete id ="deleteUserById" parameterType="java.lang.String">
      	delete from tb_user where id = #{id}
      </delete>
-	
+     
+     <!-- if练习，查询男性用户，如果输入了姓名则按姓名查询 -->
+     <select id="queryUserListByName1" resultType="User">
+     		select * from tb_user where sex = 1 
+     		<if test = "name != null and name.trim()!= ''">
+     			and name like '%${name}%'
+     		</if>
+     </select>
+     
+     <!--
+    1.一旦有条件成立的when，后续的when则不会执行
+    2.当所有的when都不执行时,才会执行otherwise
+    -->
+     <select id="queryUserListByNameOrAge" resultType="User">
+     	select * 
+     	from tb_user 
+     	WHERE sex=1
+     	<choose>
+     		<when test="name!=null and name.trim()!=''">
+     			and name like '%${name}%'
+     		</when>
+     		<when test="age!=null">
+     			and age = #{age}
+     		</when>
+     		<otherwise>
+     			and  name = '鹏程'
+     		</otherwise>
+     	</choose>
+     </select>
+      
+     <!--如果多出一个and，会自动去除，如果缺少and或者多出多个and则会报错-->
+     <select id="queryUserListByNameAndAge" resultType="User">
+     	select * from tb_user
+     	<where>
+     		<if test="name !=null and name.trim()!=''">
+     			and name like '%${name}%'
+     		</if>
+     		<if test="age != null">
+     			and age = #{age}
+     		</if>
+     	</where>
+     </select>
+     
+     <select id="queryUserListByIds" resultType="User">
+     	select * from tb_user where id in
+     	<foreach collection="ids" item = "id" open ="(" close =")" separator=",">
+     		#{id}
+     	</foreach>
+     </select>
+     
 </mapper>

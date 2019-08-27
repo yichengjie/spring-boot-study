@@ -7,6 +7,7 @@ import org.junit.Test;
 import com.yicj.mybatis.common.MybatisUtils;
 import com.yicj.mybatis.entity.User;
 
+//https://blog.csdn.net/hellozpc/article/details/80878563
 public class MybatisTest {
 	
 	@Test

@@ -6,6 +6,8 @@
 
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!--开启二级缓存,全局总开关，这里关闭，mapper中开启了也没用-->
+   		<setting name="cacheEnabled" value="false"/>
 	</settings>
 
 	<typeAliases>

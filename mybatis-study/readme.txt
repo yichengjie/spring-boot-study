@@ -5,10 +5,13 @@
 	log4j.appender.A1.layout=org.apache.log4j.PatternLayout
 	log4j.appender.A1.layout.ConversionPattern=%-d{yyyy-MM-dd HH:mm:ss,SSS} [%t] [%c]-[%p] %m%n
 
+#创建数据库
+   CREATE DATABASE ssmdemo;
+
 # 数据库建表
 	DROP TABLE IF EXISTS tb_user;
 	CREATE TABLE tb_user (
-		id varchar(32) NOT NULL auto_increment,
+		id int NOT NULL auto_increment,
 		user_name varchar(32) DEFAULT NULL,
 		password varchar(32) DEFAULT NULL,
 		name varchar(32) DEFAULT NULL,

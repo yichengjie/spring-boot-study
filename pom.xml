@@ -28,6 +28,7 @@
 		<module>simple-demo01</module>
 		<module>rabbitmq-hello</module>
         <module>mybatis-demo</module>
+		<module>mybatis-study</module>
     </modules>
 
 

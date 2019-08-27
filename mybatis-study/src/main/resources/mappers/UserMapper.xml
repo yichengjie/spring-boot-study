@@ -8,7 +8,26 @@
        1.#{},预编译的方式preparedstatement，使用占位符替换，防止sql注入，一个参数的时候，任意参数名可以接收
        2.${},普通的Statement，字符串直接拼接，不可以防止sql注入，一个参数的时候，必须使用${value}接收参数
      -->
-     <select id ="queryUserByTableName" resultType ="User">
+    <!-- 
+    	type: 返回的结果集对应的java的实体类型
+    	id: resultMap的唯一标识
+    	autoMapping: 默认完成映射，如果已开启驼峰匹配，可以解决驼峰匹配
+     --> 
+    <resultMap type="User" id="resultUser" autoMapping="true">
+    	<!-- 指定主键
+    		column: 数据库中的列表
+    		property: java实体中的属性名
+    	 -->
+    	<id column="id" property="id" />
+    	<!-- 使用result配置数据库列名java实体中的属性名对应 -->
+    	<result column="user_name" property="userName" />
+    </resultMap> 
+     
+     <!-- <select id ="queryUserByTableName" resultType ="User">
+     	select * from ${tableName}
+     </select> -->
+     
+     <select id ="queryUserByTableName" resultMap ="resultUser">
      	select * from ${tableName}
      </select>
      

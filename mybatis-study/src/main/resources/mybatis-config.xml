@@ -35,6 +35,7 @@
 		</environment>
 	</environments>
 	<mappers>
+		<mapper resource="mappers/CommonSQL.xml" />
 		<mapper resource="mappers/MyMapper.xml" />
 		<mapper resource="mappers/UserDaoMapper.xml" />
 		<mapper resource="mappers/UserMapper.xml" />

@@ -22,17 +22,21 @@
     	<!-- 使用result配置数据库列名java实体中的属性名对应 -->
     	<result column="user_name" property="userName" />
     </resultMap> 
-     
+    
+   
      <!-- <select id ="queryUserByTableName" resultType ="User">
      	select * from ${tableName}
      </select> -->
      
      <select id ="queryUserByTableName" resultMap ="resultUser">
-     	select * from ${tableName}
+     	select  <include refid="CommonSQL.userAllFieldsSql" /> from ${tableName}
      </select>
      
      <select id ="login" resultType ="User">
-     	select * from tb_user where user_name = #{userName} and password = #{password}
+     	select <include refid="CommonSQL.userAllFieldsSql" /> 
+     	from tb_user 
+     	where user_name = #{userName} 
+     	and password = #{password}
      </select>
      
      <!-- 

@@ -10,4 +10,6 @@ public class Order {
 	private String orderNumber;
 	private Date created;
 	private Date updated;
+	
+	private User user ;
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!--开启二级缓存,全局总开关，这里关闭，mapper中开启了也没用-->
+   		<setting name="cacheEnabled" value="false"/>
+	</settings>
+
+	<typeAliases>
+		<!-- 它只和 XML 配置有关，存在的意义仅在于用来减少类完全限定名的冗余 缺点：每个pojo类都要去配置。 解决方案：使用扫描包，扫描指定包下的所有类，扫描之后的别名就是类名（不区分大小写），建议使用的时候和类名一致 
+			Mybatis已经为普通的 Java 类型内建了许多相应的类型别名。它们都是大小写不敏感的. -->
+		<!-- <typeAlias type="com.yicj.mybatis.entity.User" alias="User" /> -->
+		<package name="com.yicj.mybatis.entity" />
+	</typeAliases>
+
+	<plugins>
+		<plugin interceptor="com.yicj.mybatis.plugins.ExamplePlugin">
+			<property name="someProperty" value="100" />
+		</plugin>
+	</plugins>
+
+
+	<environments default="test">
+		<environment id="test">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://127.0.0.1:3306/ssmdemo" />
+				<property name="username" value="root" />
+				<property name="password" value="root" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="mappers/CommonSQL.xml" />
+		<mapper resource="mappers/MyMapper.xml" />
+		<mapper resource="mappers/UserDaoMapper.xml" />
+		<mapper resource="mappers/UserMapper.xml" />
+		<mapper resource="mappers/OrderUserMapper.xml" />
+		<mapper resource="mappers/OrderMapper.xml" />
+	</mappers>
+</configuration>

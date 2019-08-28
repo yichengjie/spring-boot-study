@@ -29,6 +29,7 @@
 		<module>rabbitmq-hello</module>
         <module>mybatis-demo</module>
 		<module>mybatis-study</module>
+		<module>mybatis-spring-study</module>
     </modules>
 
 

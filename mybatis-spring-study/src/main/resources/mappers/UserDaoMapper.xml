@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper:根标签，namespace：命名空间，随便写，一般保证命名空间唯一 -->
+<mapper namespace="com.yicj.mybatis.dao.UserDao">
+	<!-- statement，内容：sql语句。id：唯一标识，随便写，在同一个命名空间下保持唯一
+       resultType：sql语句查询结果集的封装类型,tb_user即为数据库中的表
+     -->
+    <!--<select id="queryUserById" resultType="com.zpc.mybatis.pojo.User">-->
+    <!--select * from tb_user where id = #{id}-->
+    <!--</select>-->
+    <!-- 使用别名 -->
+    <select id ="queryUserById" resultType ="com.yicj.mybatis.entity.User">
+    	select u.id as id, u.user_name as userName, u.password as password,
+	    	u.name as name, u.age as age, u.birthday as birthday, u.sex as sex,
+	    	u.created as created, u.updated as updated
+  		from tb_user u
+  		where u.id = #{id}
+    </select>
+    
+    <select id ="queryUserAll" resultType ="com.yicj.mybatis.entity.User">
+    	select * from tb_user 
+    </select>
+    
+    <insert id ="insertUser" parameterType ="com.yicj.mybatis.entity.User">
+    	insert into tb_user (user_name,password,name,age,sex,birthday,created,updated)
+    	values (#{userName},#{password},#{name},#{age},#{sex},#{birthday},now(),now())
+    </insert>
+    
+    <update id ="updateUser" parameterType ="com.yicj.mybatis.entity.User">
+    	update tb_user
+    	<trim prefix ="set" suffixOverrides = ",">
+    		<if test="userName!=null">user_name = #{userName},</if>
+    		<if test="password!=null">password = #{password},</if>
+    		<if test="name!=null">name = #{name},</if>
+    		<if test="age!=null">age = #{age},</if>
+    		<if test="sex!=null">sex = #{sex},</if>
+    		<if test="birthday!=null">birthday = #{birthday},</if>
+    		updated = now()
+    	</trim>
+    	where (id = #{id})
+    </update>
+    
+    <delete id ="deleteUser">
+    	delete from tb_user where id = #{id}
+    </delete>
+	
+</mapper>

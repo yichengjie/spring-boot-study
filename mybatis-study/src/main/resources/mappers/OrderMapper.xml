@@ -26,13 +26,17 @@
 	
 	<resultMap id="OrderUserDetailResultMap" type="Order" autoMapping="true">
 	    <id column="id" property="id"/>
+	    <result column ="od_order_id" property ="id"></result>
+	    <result column ="o_user_id" property ="userId"></result>
+	    <result column ="o_order_number" property ="orderNumber"></result>
+	    <result column ="o_created" property ="created"></result>
+	    <result column ="o_updated" property ="updated"></result>
 	    <!--collection:定义子对象集合映射-->
 	    <!--association:完成子对象的映射-->
 	    <!--property:子对象在父对象中的属性名-->
 	    <!--javaType:子对象的java类型-->
 	    <!--autoMapping:完成子对象的自动映射，若开启驼峰，则按驼峰匹配-->
 	    <association property="user" javaType="User" autoMapping="true">
-	        <id column="user_id" property="id"/>
 	    </association>
 	    
 	    <collection property="detailList" javaType="List" 
@@ -45,8 +49,13 @@
 	</resultMap>
 	
 	 <select id="queryOrderWithUserAndDetailByOrderNumber" resultMap="OrderUserDetailResultMap">
-		   SELECT o.*, 
+		   SELECT 
 		   u.* ,
+		   o.id as o_id,
+		   o.user_id as o_user_id,
+		   o.order_number as o_order_number,
+		   o.created as o_created,
+		   o.updated as o_updated ,
 		   od.id AS od_id, 
 		   od.order_id AS od_order_id, 
 		   od.total_price AS od_total_price, 

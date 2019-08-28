@@ -39,7 +39,7 @@ public OrderMapper orderMapper ;
 	@Test
 	public void testQueryOrderWithUserAndDetailByOrderNumber() {
 		Order order = this.orderMapper.queryOrderWithUserAndDetailByOrderNumber("201807010001");
-		//orders.forEach(order -> System.out.println(order.getDetailList()));
-		System.out.println(order.getDetailList().size());
+		order.getDetailList().forEach(detail -> System.out.println(detail));
+		//System.out.println(order.getDetailList().size());
 	}
 }

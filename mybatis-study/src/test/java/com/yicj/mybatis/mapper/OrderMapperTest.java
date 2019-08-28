@@ -1,6 +1,7 @@
 package com.yicj.mybatis.mapper;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -35,5 +36,10 @@ public OrderMapper orderMapper ;
 		System.out.println(order);
 	}
 	
-	
+	@Test
+	public void testQueryOrderWithUserAndDetailByOrderNumber() {
+		Order order = this.orderMapper.queryOrderWithUserAndDetailByOrderNumber("201807010001");
+		//orders.forEach(order -> System.out.println(order.getDetailList()));
+		System.out.println(order.getDetailList().size());
+	}
 }

@@ -4,22 +4,56 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yicj.mybatis.mapper.OrderMapper">
 	<!-- 使用resultType不能完成自动映射，需要手动完成结果集映射resultMap -->
-	<resultMap id ="OrderUserResultMap" type ="Order" autoMapping="true">
-		<id column="id" property ="id"></id>
+	<resultMap id="OrderUserResultMap" type="Order"
+		autoMapping="true">
+		<id column="id" property="id"></id>
 		<!-- association:完成子对象的映射 -->
 		<!-- property: 子对象在父对象中的属性名 -->
 		<!-- javaType: 子对象的java类型 -->
 		<!-- autoMapping:完成子对象的自动映射，若开始驼峰，则按驼峰匹配 -->
-		<association property="user" javaType="User" autoMapping="true">
-		    <!-- 这个不知道有啥用 -->
+		<association property="user" javaType="User"
+			autoMapping="true">
+			<!-- 这个不知道有啥用 -->
 			<!-- <id column="user_id" property="id"></id> -->
 		</association>
 	</resultMap>
 	
-	<select id ="queryOrderWithUserByOrderNumber" resultMap ="OrderUserResultMap">
-		 select * 
-		 from tb_order o left join tb_user u on o.user_id=u.id 
-		 where o.order_number = #{number}
+	<select id="queryOrderWithUserByOrderNumber" resultMap="OrderUserResultMap">
+		select *
+		from tb_order o left join tb_user u on o.user_id=u.id
+		where o.order_number = #{number}
 	</select>
 	
+	<resultMap id="OrderUserDetailResultMap" type="Order" autoMapping="true">
+	    <id column="id" property="id"/>
+	    <!--collection:定义子对象集合映射-->
+	    <!--association:完成子对象的映射-->
+	    <!--property:子对象在父对象中的属性名-->
+	    <!--javaType:子对象的java类型-->
+	    <!--autoMapping:完成子对象的自动映射，若开启驼峰，则按驼峰匹配-->
+	    <association property="user" javaType="User" autoMapping="true">
+	        <id column="user_id" property="id"/>
+	    </association>
+	    
+	    <collection property="detailList" javaType="List" 
+	    			ofType="OrderDetail">
+	        <id column="od_id" property="id"/>
+	        <result column ="od_order_id" property ="orderId"></result>
+	        <result column ="od_total_price" property ="totalPrice"></result>
+	        <result column ="od_status" property ="status"></result>
+	    </collection>
+	</resultMap>
+	
+	 <select id="queryOrderWithUserAndDetailByOrderNumber" resultMap="OrderUserDetailResultMap">
+		   SELECT o.*, 
+		   u.* ,
+		   od.id AS od_id, 
+		   od.order_id AS od_order_id, 
+		   od.total_price AS od_total_price, 
+		   od.item_id AS od_item_id, 
+		   od.status AS od_status
+ 		   FROM tb_order o LEFT JOIN tb_user u ON o.user_id=u.id LEFT JOIN tb_orderdetail od ON o.id=od.order_id 
+ 		   WHERE o.order_number = #{number}
+	</select>
+
 </mapper>

@@ -24,7 +24,7 @@
 	</plugins>
 
 
-	<environments default="test">
+	<!-- <environments default="test">
 		<environment id="test">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
@@ -35,6 +35,6 @@
 				<property name="password" value="root" />
 			</dataSource>
 		</environment>
-	</environments>
+	</environments> -->
 
 </configuration>

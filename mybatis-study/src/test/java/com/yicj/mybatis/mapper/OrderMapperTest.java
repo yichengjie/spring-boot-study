@@ -12,7 +12,7 @@ import com.yicj.mybatis.entity.Order;
 
 public class OrderMapperTest {
 	
-public OrderMapper orderMapper ;
+	private OrderMapper orderMapper ;
 	
 	
 	@Before

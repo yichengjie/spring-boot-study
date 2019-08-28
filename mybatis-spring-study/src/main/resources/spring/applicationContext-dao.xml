@@ -13,8 +13,7 @@
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           destroy-method="close">
         <property name="driverClassName" value="${jdbc.driver}"/>
-        <property name="url"
-                  value="jdbc:mysql://${jdbc.host}:3306/${jdbc.database}?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/ssmdemo"/>
         <property name="username" value="${jdbc.userName}"/>
         <property name="password" value="${jdbc.passWord}"/>
         <!-- 初始化连接大小 -->

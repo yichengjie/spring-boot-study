@@ -26,3 +26,15 @@
 # 插入测试数据
 	INSERT INTO ssmdemo.tb_user (user_name, password, name, age, sex, birthday, created, updated) VALUES ('zpc', '123456', '鹏程', '22', '1', '1990-09-02', sysdate(), sysdate());
 	INSERT INTO ssmdemo.tb_user (user_name, password, name, age, sex, birthday, created, updated) VALUES ('hj', '123456', '静静', '22', '1', '1993-09-05', sysdate(), sysdate());
+
+
+# 创建order表
+	CREATE TABLE tb_order (
+		id int(11) NOT NULL AUTO_INCREMENT,
+		user_id int(11) DEFAULT NULL,
+		order_number varchar(255) DEFAULT NULL,
+		created datetime DEFAULT NULL,
+		updated datetime DEFAULT NULL,
+		PRIMARY KEY (id)
+	) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+	

@@ -42,4 +42,10 @@ public OrderMapper orderMapper ;
 		order.getDetailList().forEach(detail -> System.out.println(detail));
 		//System.out.println(order.getDetailList().size());
 	}
+	
+	@Test
+	public void testQueryOrderWithUserAndDetailItemByOrderNumber() {
+		Order order = this.orderMapper.queryOrderWithUserAndDetailItemByOrderNumber("201807010001") ;
+		order.getDetailList().forEach(detail -> System.out.println(detail));
+	}
 }

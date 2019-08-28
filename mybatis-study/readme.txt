@@ -40,9 +40,9 @@
 
 CREATE TABLE tb_item (
 	id int(11) NOT NULL,
-	itemName varchar(255) DEFAULT NULL,
-	itemPrice decimal(10,2) DEFAULT NULL,
-	itemDetail varchar(255) DEFAULT NULL,
+	item_name varchar(255) DEFAULT NULL,
+	item_price decimal(10,2) DEFAULT NULL,
+	item_detail varchar(255) DEFAULT NULL,
 	PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

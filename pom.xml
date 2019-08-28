@@ -31,7 +31,8 @@
 		<module>mybatis-study</module>
 		<module>mybatis-spring-study</module>
 		<module>mybatis-boot-study</module>
-    </modules>
+		<module>mybatis-generator-study</module>
+	</modules>
 
 
 	<build>

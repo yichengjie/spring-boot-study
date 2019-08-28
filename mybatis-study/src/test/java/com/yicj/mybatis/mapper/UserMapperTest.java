@@ -14,7 +14,7 @@ import com.yicj.mybatis.entity.User;
 
 public class UserMapperTest {
 
-	public UserMapper userMapper ;
+	private UserMapper userMapper ;
 	
 	
 	@Before

@@ -8,7 +8,7 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>mybatis-boot-study</artifactId>
+	<artifactId>mybatis-boot-swagger-study</artifactId>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -70,6 +70,20 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>nexus-dbky</id>
+			<name>Nexus dbky</name>
+			<url>http://172.22.57.220:8081/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 	<build>
 		<finalName>mybatis-study</finalName>

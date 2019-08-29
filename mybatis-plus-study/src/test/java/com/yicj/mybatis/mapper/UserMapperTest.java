@@ -23,7 +23,7 @@ public class UserMapperTest {
 	@Test
 	public void testSelectAll2() {
 		List<User> users = this.userMapper.selectList(null);
-		users.forEach(user->System.out.println(user));
+		users.forEach(System.out::println);
 	}
 	
 	@Test

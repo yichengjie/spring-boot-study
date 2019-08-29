@@ -21,6 +21,12 @@ public class UserMapperTest {
 	private UserMapper userMapper ;
 	
 	@Test
+	public void testSelectAll2() {
+		List<User> users = this.userMapper.selectList(null);
+		users.forEach(user->System.out.println(user));
+	}
+	
+	@Test
 	public void testSelectUserAll() {
 		List<User> users = this.userMapper.selectUserAll();
 		users.forEach(user-> System.out.println(user));

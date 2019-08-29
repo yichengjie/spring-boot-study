@@ -8,6 +8,7 @@
 	<name>spring-boot-study</name>
 	<description>Demo project for Spring Boot</description>
 	<packaging>pom</packaging>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -33,11 +34,11 @@
 		<module>mybatis-boot-study</module>
 		<module>mybatis-boot-swagger-study</module>
 		<module>mybatis-generator-study</module>
-		
+
+		<module>mybatis-plus-study</module>
 	</modules>
 	
-	
-	<repositories>
+	<!-- <repositories>
 		<repository>
 			<id>nexus-dbky</id>
 			<name>Nexus dbky</name>
@@ -49,7 +50,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-	</repositories>
+	</repositories> -->
 
 
 	<build>

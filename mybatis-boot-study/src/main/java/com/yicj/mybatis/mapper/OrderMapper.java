@@ -1,8 +1,10 @@
 package com.yicj.mybatis.mapper;
 
 import org.apache.ibatis.annotations.Param;
-import com.yicj.mybatis.entity.Order;
+import org.springframework.stereotype.Repository;
 
+import com.yicj.mybatis.entity.Order;
+@Repository
 public interface OrderMapper {
 
 	//根据订单号查询订单用户的信息

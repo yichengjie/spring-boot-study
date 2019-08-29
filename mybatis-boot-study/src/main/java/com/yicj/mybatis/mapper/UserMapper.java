@@ -3,9 +3,11 @@ package com.yicj.mybatis.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import com.yicj.mybatis.entity.User;
 
+@Repository
 public interface UserMapper {
 	//根据表名查询用户信息（直接使用注解指定传入参数名称）
 	public User login(@Param("userName") String userName, 

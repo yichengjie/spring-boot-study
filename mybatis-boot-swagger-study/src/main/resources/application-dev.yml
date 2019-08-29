@@ -13,7 +13,8 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
-    
+swagger2: 
+  enable: true    
 logging:
   level:
     com: 

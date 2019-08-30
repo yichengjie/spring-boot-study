@@ -26,5 +26,7 @@ logging:
   level:
     com: 
       yicj:
-        mybatis:
-          mapper: debug
+        study:
+          user: 
+            mapper: debug
+            

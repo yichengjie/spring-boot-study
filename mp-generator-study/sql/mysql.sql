@@ -25,3 +25,5 @@ CREATE TABLE user (
  
  insert into user(id,name,age,email,manager_id,create_time)
  values(1094592041087729666,'刘红雨', 32 ,'lhm@baomidou.com',1088248166370832385,'2019-01-14 09:48:16') ;
+ 
+ 

@@ -17,4 +17,8 @@
 		  reasonable: true
 		  support-methods-arguments: true
 		  params: countSql 
+   3.3 使用的地方加上 代码
+       PageHelper.startPage(1, 5);	
+       //其他业务	  
+
 		  

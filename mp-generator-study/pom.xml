@@ -48,24 +48,6 @@
 		</dependency>
 		<!-- mp与springboot整合 end -->
 		
-		<!-- 分页组件依赖 start -->
-		<dependency>
-		    <groupId>com.github.pagehelper</groupId>
-		    <artifactId>pagehelper</artifactId>
-		    <version>5.1.10</version>
-		</dependency>
-		<dependency>
-		    <groupId>com.github.pagehelper</groupId>
-		    <artifactId>pagehelper-spring-boot-autoconfigure</artifactId>
-		    <version>1.2.11</version>
-		</dependency>
-		<dependency>
-		    <groupId>com.github.pagehelper</groupId>
-		    <artifactId>pagehelper-spring-boot-starter</artifactId>
-		    <version>1.2.11</version>
-		</dependency>
-		<!-- 分页组件依赖 end -->
-		
 		<!-- spring 单元测试 start -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

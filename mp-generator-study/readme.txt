@@ -9,16 +9,11 @@
 		    map-underscore-to-camel-case: true
 		    cache-enabled: false
    2.2 增加注解 @MapperScan("com.yicj.study.*.mapper")
-2.整合page-helper
-  2.1 加入jar依赖 pagehelper,pagehelper-spring-boot-autoconfigure,pagehelper-spring-boot-starter
-  2.2 application.yml增加配置
-  	  pagehelper:
-		  helper-dialect: mysql
-		  reasonable: true
-		  support-methods-arguments: true
-		  params: countSql 
-   3.3 使用的地方加上 代码
-       PageHelper.startPage(1, 5);	
-       //其他业务	  
+3.使用mp自带分页组件
+  3.1 编写MybatisPlusConfig配置
+  3.2 使用的地方加上 代码
+       //参数1：第几页
+       //参数2：每页几条记录
+	   IPage<User> retPage = userService.page(new Page<User>(1, 2)); 
 
 		  

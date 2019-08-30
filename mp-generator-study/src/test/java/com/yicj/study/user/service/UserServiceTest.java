@@ -7,10 +7,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.github.pagehelper.PageHelper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yicj.study.MpApplication;
 import com.yicj.study.user.entity.User;
 
@@ -22,9 +22,14 @@ public class UserServiceTest {
 	
 	@Test
 	public void testSelectByPage() {
-		PageHelper.startPage(1, 3);
-		List<User> users = userService.list();
-		users.forEach(System.out::println);
+		IPage<User> page = new Page<User>(1, 2) ;
+		IPage<User> retPage = userService.page(page);
+		List<User> records = retPage.getRecords();
+		records.forEach(System.out::println);
+		long pageCount = retPage.getPages();
+		System.out.println("====> pageCount : " + pageCount);
+		long total = retPage.getTotal();
+		System.out.println("====> total : " + total);
 	}
 	
 	//名字中包含雨，且年龄小于40

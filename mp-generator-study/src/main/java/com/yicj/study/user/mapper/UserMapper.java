@@ -1,7 +1,7 @@
 package com.yicj.study.user.mapper;
 
-import com.yicj.study.user.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.yicj.study.user.entity.User;
 
 /**
  * <p>
@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2019-08-30
  */
 public interface UserMapper extends BaseMapper<User> {
-
+	
 }

@@ -10,7 +10,7 @@ package com.yicj.study.user.entity;
     * 
     * </p>
 *
-* @author jobob
+* @author yicj
 * @since 2019-08-30
 */
     @Data

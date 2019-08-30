@@ -11,7 +11,7 @@ import com.yicj.study.common.BaseController;
  *  前端控制器
  * </p>
  *
- * @author jobob
+ * @author yicj
  * @since 2019-08-30
  */
 @RestController

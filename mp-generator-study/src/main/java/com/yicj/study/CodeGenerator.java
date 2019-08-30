@@ -1,6 +1,5 @@
 package com.yicj.study;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,20 +27,16 @@ public class CodeGenerator {
 	 */
 	public static String scanner(String tip) {
 		Scanner scanner = new Scanner(System.in);
-		try {
-			StringBuilder help = new StringBuilder();
-			help.append("请输入" + tip + "：");
-			System.out.println(help.toString());
-			if (scanner.hasNext()) {
-				String ipt = scanner.next();
-				if (StringUtils.isNotEmpty(ipt)) {
-					return ipt;
-				}
+		StringBuilder help = new StringBuilder();
+		help.append("请输入" + tip + "：");
+		System.out.println(help.toString());
+		if (scanner.hasNext()) {
+			String ipt = scanner.next();
+			if (StringUtils.isNotEmpty(ipt)) {
+				return ipt;
 			}
-			throw new MybatisPlusException("请输入正确的" + tip + "！");
-		} finally {
-			scanner.close();
 		}
+		throw new MybatisPlusException("请输入正确的" + tip + "！");
 	}
 
 	public static void main(String[] args) {
@@ -60,7 +55,7 @@ public class CodeGenerator {
 
 		// 数据源配置
 		DataSourceConfig dsc = new DataSourceConfig();
-		dsc.setUrl("jdbc:mysql://localhost:3306/ssmdemo?useUnicode=true&useSSL=false&characterEncoding=utf8");
+		dsc.setUrl("jdbc:mysql://localhost:3306/ssmdemo?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC");
 		// dsc.setSchemaName("public");
 		dsc.setDriverName("com.mysql.jdbc.Driver");
 		dsc.setUsername("root");

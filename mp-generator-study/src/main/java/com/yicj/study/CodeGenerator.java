@@ -57,7 +57,7 @@ public class CodeGenerator {
 		DataSourceConfig dsc = new DataSourceConfig();
 		dsc.setUrl("jdbc:mysql://localhost:3306/ssmdemo?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC");
 		// dsc.setSchemaName("public");
-		dsc.setDriverName("com.mysql.jdbc.Driver");
+		dsc.setDriverName("com.mysql.cj.jdbc.Driver");
 		dsc.setUsername("root");
 		dsc.setPassword("root");
 		mpg.setDataSource(dsc);

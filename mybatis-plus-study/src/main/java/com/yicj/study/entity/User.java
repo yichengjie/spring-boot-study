@@ -1,7 +1,5 @@
 package com.yicj.study.entity;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data

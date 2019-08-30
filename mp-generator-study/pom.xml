@@ -28,7 +28,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<!-- springboot的web依赖 end -->
-		
 		<!-- 连接数据库 start -->
 		<dependency>
 			<groupId>mysql</groupId>

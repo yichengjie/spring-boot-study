@@ -7,6 +7,7 @@ spring:
     password: root
     url: jdbc:mysql://localhost:3306/ssmdemo?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
+
 mybatis:
   mapper-locations: classpath:mappers/*Mapper.xml
   type-aliases-package: com.yicj.mybatis.entity

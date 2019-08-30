@@ -1,0 +1,1 @@
+1.注意pom加入mybatis-plus-boot-starter后就不要加入mybatis-spring-boot-starter否则会报错

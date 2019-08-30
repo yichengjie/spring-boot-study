@@ -7,9 +7,11 @@ spring:
     password: root
     url: jdbc:mysql://localhost:3306/ssmdemo?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
-mybatis:
-  mapper-locations: classpath:mappers/*Mapper.xml
-  type-aliases-package: com.yicj.mybatis.entity
+
+#mybatis plus 设置
+mybatis-plus: 
+  mapper-locations: classpath*:mapper/*/*Mapper.xml
+  type-aliases-package: com.yicj.study.*.entity
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false

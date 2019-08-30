@@ -34,9 +34,9 @@
 		<module>mybatis-boot-study</module>
 		<module>mybatis-boot-swagger-study</module>
 		<module>mybatis-generator-study</module>
-
 		<module>mybatis-plus-study</module>
 		<module>mp-generator-study</module>
+		<module>mp-generator-study2</module>
 	</modules>
 	
 	<!-- <repositories>

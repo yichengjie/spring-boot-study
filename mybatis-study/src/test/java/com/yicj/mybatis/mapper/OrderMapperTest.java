@@ -1,8 +1,6 @@
 package com.yicj.mybatis.mapper;
 
 import java.io.IOException;
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Before;

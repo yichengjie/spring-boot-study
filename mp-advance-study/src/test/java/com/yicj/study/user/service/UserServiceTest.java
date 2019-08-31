@@ -2,7 +2,6 @@ package com.yicj.study.user.service;
 
 import java.util.List;
 import java.util.Map;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yicj.study.MpApplication;
 import com.yicj.study.user.entity.User;
-
 import lombok.extern.slf4j.Slf4j;
 
 @RunWith(SpringRunner.class)
@@ -88,6 +86,8 @@ public class UserServiceTest {
 	
 	@Test
 	public void testQuery1() {
+		
+		
 		QueryWrapper<User> wrapper = new QueryWrapper<>();
 		wrapper.lambda().eq(User::getId, 1088250446457389058L) ;
 		User user = this.userService.getOne(wrapper);
@@ -125,5 +125,4 @@ public class UserServiceTest {
 		List<User> users = this.userService.listByMyWrapper(wrapper);
 		users.forEach(u->log.info(u.toString()));
 	}
-	
 }

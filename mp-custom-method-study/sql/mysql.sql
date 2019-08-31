@@ -25,3 +25,6 @@ CREATE TABLE user (
  values(1094592041087729666,'刘红雨', 32 ,'lhm@baomidou.com',1088248166370832385,'2019-01-14 09:48:16') ;
  
  
+ -- 增加字段测试乐观锁
+ ALTER TABLE USER ADD deleted INT(1) DEFAULT 0 COMMENT '逻辑删除'  ;
+ 

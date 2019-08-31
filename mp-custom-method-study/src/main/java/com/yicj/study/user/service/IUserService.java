@@ -1,6 +1,9 @@
 package com.yicj.study.user.service;
 
 import com.yicj.study.user.entity.User;
+
+import java.util.List;
+
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -14,4 +17,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IUserService extends IService<User> {
 	
 	int deleteAll() ;
+	
+	int insertBatchSomeColumn(List<User> list) ;
 }

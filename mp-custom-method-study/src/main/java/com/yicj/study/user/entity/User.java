@@ -20,7 +20,8 @@ package com.yicj.study.user.entity;
     public class User extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
-
+    
+    private Long id ;
             /**
             * 姓名
             */
@@ -45,6 +46,8 @@ package com.yicj.study.user.entity;
             * 创建时间
             */
     private LocalDateTime createTime;
-
+    
+    //逻辑删除
+    private Integer deleted ;
 
 }

@@ -5,6 +5,8 @@ import com.yicj.study.user.mapper.UserMapper;
 import com.yicj.study.user.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 	@Override
 	public int deleteAll() {
 		return this.userMapper.deleteAll(); 
+	}
+
+	@Override
+	public int insertBatchSomeColumn(List<User> list) {
+		return this.userMapper.insertBatchSomeColumn(list);
 	}
 
 }

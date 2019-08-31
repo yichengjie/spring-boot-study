@@ -50,5 +50,6 @@
    8.1 在字段上注解@TableField(fill=FieldFill.INSERT)
    8.2 编写MyMetaObjectHandler实现MetaObjectHandler接口，
    8.3 MyMetaObjectHandler类上增加@Component注解
-   8.4 单元测试即可
+   5.4 需要注意自动填充优化
+   8.5 单元测试即可
        

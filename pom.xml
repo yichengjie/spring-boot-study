@@ -40,6 +40,7 @@
 		<module>mp-advance-study</module>
 		<module>mp-tenant-study</module>
 		<module>mp-dynamic-table-study</module>
+		<module>mp-custom-method-study</module>	
 	</modules>
 	
 	<!-- <repositories>

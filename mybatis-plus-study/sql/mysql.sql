@@ -6,8 +6,7 @@ CREATE TABLE user (
     email VARCHAR(50) DEFAULT NULL COMMENT '邮箱',
     manager_id BIGINT(20) DEFAULT NULL COMMENT '直属上级id',
     create_time DATETIME DEFAULT NULL COMMENT '创建时间',
-    CONSTRAINT manager_fk FOREIGN KEY (manager_id)
-        REFERENCES user (id)
+    FOREIGN KEY (manager_id) REFERENCES user (id)
 )  ENGINE=INNODB CHARSET=UTF8;
 
 #初始化数据：

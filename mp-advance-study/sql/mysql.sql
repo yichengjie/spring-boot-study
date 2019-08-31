@@ -1,14 +1,14 @@
 CREATE TABLE user (
-   id BIGINT(20) NOT NULL COMMENT '主键',
-   name VARCHAR(30) DEFAULT NULL COMMENT '姓名',
-   age INT(11) DEFAULT NULL COMMENT '年龄',
-   email VARCHAR(50) DEFAULT NULL COMMENT '邮箱',
-   manager_id BIGINT(20) DEFAULT NULL COMMENT '直属上级id',
-   create_time DATETIME DEFAULT NULL COMMENT '创建时间',
-   PRIMARY KEY (id),
-   KEY manager_fk (manager_id),
-   CONSTRAINT manager_fk FOREIGN KEY (manager_id) REFERENCES user (id)
- ) ENGINE=INNODB DEFAULT CHARSET=utf8 ;
+    id BIGINT(20) PRIMARY KEY NOT NULL COMMENT '主键',
+    name VARCHAR(30) DEFAULT NULL COMMENT '姓名',
+    age INT(11) DEFAULT NULL COMMENT '年龄',
+    email VARCHAR(50) DEFAULT NULL COMMENT '邮箱',
+    manager_id BIGINT(20) DEFAULT NULL COMMENT '直属上级id',
+    create_time DATETIME DEFAULT NULL COMMENT '创建时间',
+    CONSTRAINT manager_fk FOREIGN KEY (manager_id)
+        REFERENCES user (id)
+)  ENGINE=INNODB CHARSET=UTF8;
+ 
 
  
  

@@ -39,6 +39,7 @@
 		<module>mp-generator-study2</module>
 		<module>mp-advance-study</module>
 		<module>mp-tenant-study</module>
+		<module>mp-dynamic-table-study</module>
 	</modules>
 	
 	<!-- <repositories>

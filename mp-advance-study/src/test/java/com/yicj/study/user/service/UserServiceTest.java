@@ -86,8 +86,6 @@ public class UserServiceTest {
 	
 	@Test
 	public void testQuery1() {
-		
-		
 		QueryWrapper<User> wrapper = new QueryWrapper<>();
 		wrapper.lambda().eq(User::getId, 1088250446457389058L) ;
 		User user = this.userService.getOne(wrapper);
@@ -124,5 +122,18 @@ public class UserServiceTest {
 		wrapper.lambda().like(User::getName, "雨") ;
 		List<User> users = this.userService.listByMyWrapper(wrapper);
 		users.forEach(u->log.info(u.toString()));
+	}
+	
+	@Test
+	public void testListByMyWrapper2() {
+		QueryWrapper<User> wrapper = new QueryWrapper<>();
+		wrapper.lambda().gt(User::getAge, 20).eq(User::getDeleted, 0) ;
+		List<User> users = this.userService.listByMyWrapper(wrapper);
+		users.forEach(u->log.info(u.toString()));
+	}
+	
+	@Test
+	public void testLogicDeleteById() {
+		this.userService.removeById(1087982257332887555L) ;
 	}
 }

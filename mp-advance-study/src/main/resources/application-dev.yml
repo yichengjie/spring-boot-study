@@ -16,7 +16,9 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
   global-config:
-    sql-parser-cache: true
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0
  
 logging:
   level:

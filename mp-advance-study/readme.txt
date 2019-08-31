@@ -30,4 +30,19 @@
        @Autowired
 	   private UserMapper userMapper ;
    4.3 单元测试即可
+   
+   
+5. 逻辑删除
+   5.1 mybatis-plus配置中增加
+   	   global-config:
+		 db-config:
+		    logic-delete-value: 1   #逻辑已删除
+		    logic-not-delete-value: 0   #逻辑未删除 
+   5.2 entity的deleted字段上增加@TableLogic注解
+   5.3 单元测试即可
+   
+6. 查询时不显示逻辑字段
+   6.1在逻辑删除字段上增加注解@TableField(select=false)即可
+
+7. 自定义的wrapper查询，需要自己手动添加逻辑删除字段的值，或则直接写在sql中
        

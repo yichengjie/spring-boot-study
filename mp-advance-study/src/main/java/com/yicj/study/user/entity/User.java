@@ -1,6 +1,8 @@
 package com.yicj.study.user.entity;
 
-    import com.baomidou.mybatisplus.annotation.Version;
+    import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.yicj.study.common.BaseEntity;
     import java.time.LocalDateTime;
     import lombok.Data;
@@ -52,4 +54,9 @@ import com.yicj.study.common.BaseEntity;
     //版本号
     @Version
     private Integer version ;
+    
+    //逻辑删除
+    @TableLogic
+    @TableField(select=false)
+    private Integer deleted ;
 }

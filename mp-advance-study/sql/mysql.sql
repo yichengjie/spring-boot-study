@@ -30,10 +30,13 @@ CREATE TABLE user (
  
   
 -- 增加字段测试乐观锁
-alter table user add version INT(11) default 0  ;
+alter table user add version INT(11) default 0  COMMENT '版本号';
 
 -- 支持多租户
-alter table user add tenant_id varchar(11) default ''  ;
+alter table user add tenant_id varchar(11) default '' COMMENT '多租户' ;
+
+ -- 增加逻辑删除字段
+ ALTER TABLE USER ADD deleted INT(1) DEFAULT 0 COMMENT '逻辑删除'  ;
 
 
 

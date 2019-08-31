@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2019-08-31
  */
 public interface UserMapper extends BaseMapper<User> {
-
+	//删除所有
+	int deleteAll() ;
 }

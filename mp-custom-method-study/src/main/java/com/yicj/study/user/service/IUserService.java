@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-08-31
  */
 public interface IUserService extends IService<User> {
-
+	
+	int deleteAll() ;
 }

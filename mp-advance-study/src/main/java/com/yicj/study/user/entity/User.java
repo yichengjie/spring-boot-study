@@ -1,6 +1,7 @@
 package com.yicj.study.user.entity;
 
-    import com.yicj.study.common.BaseEntity;
+    import com.baomidou.mybatisplus.annotation.Version;
+import com.yicj.study.common.BaseEntity;
     import java.time.LocalDateTime;
     import lombok.Data;
     import lombok.EqualsAndHashCode;
@@ -15,12 +16,15 @@ package com.yicj.study.user.entity;
 * @since 2019-08-31
 */
     @Data
-        @EqualsAndHashCode(callSuper = true)
+    @EqualsAndHashCode(callSuper = true)
     @Accessors(chain = true)
     public class User extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * 主键
+     */
+    private Long id ;
             /**
             * 姓名
             */
@@ -45,6 +49,7 @@ package com.yicj.study.user.entity;
             * 创建时间
             */
     private LocalDateTime createTime;
-
-
+    //版本号
+    @Version
+    private Integer version ;
 }

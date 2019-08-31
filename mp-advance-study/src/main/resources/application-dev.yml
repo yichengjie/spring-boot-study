@@ -5,8 +5,8 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:p6spy:mysql://localhost:3306/ssmdemo?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:p6spy:p6spy:mysql://localhost:3306/ssmdemo?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
 
 #mybatis plus 设置
 mybatis-plus: 

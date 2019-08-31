@@ -67,13 +67,6 @@
 		</dependency>
 		<!-- spring 单元测试 end -->
 		
-		<!-- mybatis性能分析插件 -->
-		<dependency>
-		    <groupId>p6spy</groupId>
-		    <artifactId>p6spy</artifactId>
-		    <version>3.8.2</version>
-		</dependency>
-		
 		<!-- mp代码生成 start -->
 		<dependency>
 			<groupId>com.baomidou</groupId>

@@ -16,3 +16,18 @@
   3.2 注解实体字段 @Version 必须要!
       @Version
 	  private Integer version;
+	  
+	  
+4. 自定义wrapper
+   4.1 XXXMapper.java文件中增加接口
+       @Select("SELECT * FROM user ${ew.customSqlSegment}")
+       List<User> selectByMyWrapper(@Param(Constants.WRAPPER) Wrapper<User> userWrapper);
+   4.2 XXXMapper.xml文件中增加sql
+       <select id="selectByMyWrapper" resultType="User">
+	       SELECT * FROM user ${ew.customSqlSegment}
+	   </select>
+   4.3 XXXService层中增加接口，并注入XXXMapper
+       @Autowired
+	   private UserMapper userMapper ;
+   4.3 单元测试即可
+       

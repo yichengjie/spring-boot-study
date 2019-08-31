@@ -8,8 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -110,6 +108,22 @@ public class UserServiceTest {
 		wrapper.lambda().like(User::getName, "雨").lt(User::getAge, 50) ;
 		List<User> users = this.userService.list(wrapper);
 		users.forEach(System.out::println);
+	}
+	
+	@Test
+	public void testQuery4() {
+		QueryWrapper<User> wrapper = new QueryWrapper<>();
+		wrapper.lambda().like(User::getName, "雨").or().lt(User::getAge, 50) ;
+		List<User> users = this.userService.list(wrapper);
+		users.forEach(System.out::println);
+	}
+	
+	@Test
+	public void testListByMyWrapper() {
+		QueryWrapper<User> wrapper = new QueryWrapper<>();
+		wrapper.lambda().like(User::getName, "雨") ;
+		List<User> users = this.userService.listByMyWrapper(wrapper);
+		users.forEach(u->log.info(u.toString()));
 	}
 	
 }

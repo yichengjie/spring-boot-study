@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.baomidou.mybatisplus.annotation.SqlParser;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
@@ -18,6 +19,7 @@ import com.yicj.study.user.entity.User;
  * @author yicj
  * @since 2019-08-31
  */
+
 public interface UserMapper extends BaseMapper<User> {
 	
 	/**
@@ -27,6 +29,7 @@ public interface UserMapper extends BaseMapper<User> {
     * @param userWrapper
     * @return
     */
+   @SqlParser(filter=true)
    @Select("SELECT * FROM user ${ew.customSqlSegment}")
    List<User> selectByMyWrapper(@Param(Constants.WRAPPER) Wrapper<User> userWrapper);
 }

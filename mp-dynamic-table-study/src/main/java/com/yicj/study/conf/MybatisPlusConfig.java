@@ -9,18 +9,16 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.baomidou.mybatisplus.annotation.SqlParser;
 import com.baomidou.mybatisplus.core.parser.ISqlParser;
 import com.baomidou.mybatisplus.core.parser.ISqlParserFilter;
 import com.baomidou.mybatisplus.core.parser.SqlParserHelper;
 import com.baomidou.mybatisplus.extension.parsers.DynamicTableNameParser;
 import com.baomidou.mybatisplus.extension.parsers.ITableNameHandler;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.tenant.TenantHandler;
-import com.baomidou.mybatisplus.extension.plugins.tenant.TenantSqlParser;
 import com.yicj.study.common.GlobalSession;
 import com.yicj.study.vo.UserVo;
-import net.sf.jsqlparser.expression.Expression;
-import net.sf.jsqlparser.expression.StringValue;
 
 @Configuration
 public class MybatisPlusConfig {
@@ -51,7 +49,14 @@ public class MybatisPlusConfig {
 		@Override
 		public String dynamicTableName(MetaObject metaObject, String sql, String tableName) {
 			UserVo vo = GlobalSession.getUserVo();
-			return tableName+"_" + vo.getTenantId();
+			//注意：
+			//1.如果这里返回null，则不进行替换
+			//2.下面的ISqlParserFilter配置继续生效，将不进行表名替换
+			//3.@SqlParser(filter=true)注解的方法也不进行表名替换
+			if(vo!=null) {
+				return tableName+"_" + vo.getTenantId();
+			}
+			return null ;
 		}
 		
 	}

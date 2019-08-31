@@ -12,7 +12,7 @@ import com.yicj.study.common.BaseController;
  * </p>
  *
  * @author yicj
- * @since 2019-08-30
+ * @since 2019-08-31
  */
 @RestController
 @RequestMapping("/user/user")

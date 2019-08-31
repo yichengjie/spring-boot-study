@@ -12,7 +12,7 @@ package com.yicj.study.user.entity;
     * </p>
 *
 * @author yicj
-* @since 2019-08-30
+* @since 2019-08-31
 */
     @Data
         @EqualsAndHashCode(callSuper = true)

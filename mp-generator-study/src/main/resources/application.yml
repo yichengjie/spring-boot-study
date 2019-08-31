@@ -18,9 +18,5 @@ mybatis-plus:
  
 logging:
   level:
-    com: 
-      yicj:
-        study:
-          user: 
-            mapper: debug
-            
+    root: info
+    com.yicj.study.user.mapper: debug 

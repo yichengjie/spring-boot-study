@@ -136,4 +136,25 @@ public class UserServiceTest {
 	public void testLogicDeleteById() {
 		this.userService.removeById(1087982257332887555L) ;
 	}
+	
+	//测试自动填充当前时间
+	@Test
+	public void testInsert() {
+		User user = new User() ;
+		user.setName("王五") ;
+		user.setAge(25) ;
+		user.setEmail("wangwu@qq.com") ;
+		user.setManagerId(1087982257332887554L) ;
+		boolean flag = this.userService.save(user);
+		System.out.println("save success flag is : " + flag);
+	}
+	
+	@Test
+	public void testUpdateById2() {
+		User user = new User() ;
+		user.setName("王五2") ;
+		user.setId(1167810772487749634L) ;
+		this.userService.updateById(user) ;
+	}
+	
 }

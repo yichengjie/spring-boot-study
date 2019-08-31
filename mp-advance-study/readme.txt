@@ -45,4 +45,10 @@
    6.1在逻辑删除字段上增加注解@TableField(select=false)即可
 
 7. 自定义的wrapper查询，需要自己手动添加逻辑删除字段的值，或则直接写在sql中
+
+8. 自动填充字段值
+   8.1 在字段上注解@TableField(fill=FieldFill.INSERT)
+   8.2 编写MyMetaObjectHandler实现MetaObjectHandler接口，
+   8.3 MyMetaObjectHandler类上增加@Component注解
+   8.4 单元测试即可
        

@@ -27,16 +27,15 @@ CREATE TABLE user (
  insert into user(id,name,age,email,manager_id,create_time)
  values(1094592041087729666,'刘红雨', 32 ,'lhm@baomidou.com',1088248166370832385,'2019-01-14 09:48:16') ;
  
- 
   
 -- 增加字段测试乐观锁
 alter table user add version INT(11) default 0  COMMENT '版本号';
-
 -- 支持多租户
 alter table user add tenant_id varchar(11) default '' COMMENT '多租户' ;
-
- -- 增加逻辑删除字段
- ALTER TABLE USER ADD deleted INT(1) DEFAULT 0 COMMENT '逻辑删除'  ;
+-- 增加逻辑删除字段
+ALTER TABLE USER ADD deleted INT(1) DEFAULT 0 COMMENT '逻辑删除'  ;
+-- 最后修改日期
+ALTER TABLE USER ADD update_time DATETIME DEFAULT NULL COMMENT '最后修改日期'  ;
 
 
 

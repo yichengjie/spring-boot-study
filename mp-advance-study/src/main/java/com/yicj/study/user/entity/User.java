@@ -1,6 +1,7 @@
 package com.yicj.study.user.entity;
 
-    import com.baomidou.mybatisplus.annotation.TableField;
+    import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.yicj.study.common.BaseEntity;
@@ -50,7 +51,12 @@ import com.yicj.study.common.BaseEntity;
             /**
             * 创建时间
             */
+    @TableField(fill=FieldFill.INSERT)
     private LocalDateTime createTime;
+    //最后更新日期
+    @TableField(fill=FieldFill.UPDATE)
+    private LocalDateTime updateTime ;
+    
     //版本号
     @Version
     private Integer version ;

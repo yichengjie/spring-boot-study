@@ -36,6 +36,7 @@
 		<module>mybatis-generator-study</module>
 		<module>mybatis-plus-study</module>
 		<module>mp-generator-study</module>
+		<module>mp-generator2-study</module>
 		<module>mp-pagehelper-study</module>
 		<module>mp-advance-study</module>
 		<module>mp-tenant-study</module>

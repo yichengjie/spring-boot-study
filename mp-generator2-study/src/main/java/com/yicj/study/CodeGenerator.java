@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
-public class CodeGenerator2 {
+public class CodeGenerator {
 	public static void main(String[] args) {
 		AutoGenerator mpg = new AutoGenerator();
 		// set freemarker engine
@@ -46,18 +46,23 @@ public class CodeGenerator2 {
 		// 策略配置
 		StrategyConfig strategy = new StrategyConfig();
 		strategy.setTablePrefix(new String[] { "tb_" });// 此处可以修改为您的表前缀
-		strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
+		strategy.setNaming(NamingStrategy.underline_to_camel);
+		strategy.setColumnNaming(NamingStrategy.underline_to_camel);
 		strategy.setInclude(new String[] { "tb_order" }); // 需要生成的表
-
+		//strategy.setSuperEntityClass("com.yicj.study.common.BaseEntity");
 		strategy.setSuperServiceClass(null);
 		strategy.setSuperServiceImplClass(null);
 		strategy.setSuperMapperClass(null);
-
+		
+		strategy.setEntityLombokModel(true);
+		strategy.setRestControllerStyle(true);
+		// 公共父类
+		strategy.setSuperControllerClass("com.yicj.study.common.BaseController");
 		mpg.setStrategy(strategy);
 
 		// 包配置
 		PackageConfig pc = new PackageConfig();
-		pc.setParent("com.cloudwalk");
+		pc.setParent("com.yicj.study");
 		pc.setController("controller");
 		pc.setService("service");
 		pc.setServiceImpl("service.impl");

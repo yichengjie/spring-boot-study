@@ -7,7 +7,7 @@
 		<artifactId>spring-boot-study</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>mp-generator-study2</artifactId>
+	<artifactId>mp-pagehelper-study</artifactId>
 
 	<dependencyManagement>
 		<dependencies>

@@ -8,6 +8,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>poi-simple-study</artifactId>
+	<properties>
+		<poi.version>4.1.0</poi.version>
+	</properties>
 
 	<dependencyManagement>
 		<dependencies>
@@ -78,6 +81,20 @@
 			<artifactId>freemarker</artifactId>
 		</dependency>
 		<!-- mp代码生成 end -->
-
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>${poi.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>${poi.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		</dependency>
 	</dependencies>
 </project>

@@ -1,9 +1,5 @@
 package com.yicj.study.entity;
 
-    import com.baomidou.mybatisplus.annotation.TableName;
-    import com.baomidou.mybatisplus.annotation.IdType;
-    import java.time.LocalDate;
-    import com.baomidou.mybatisplus.annotation.TableId;
     import java.time.LocalDateTime;
     import java.io.Serializable;
     import lombok.Data;
@@ -21,29 +17,53 @@ package com.yicj.study.entity;
     @Data
         @EqualsAndHashCode(callSuper = false)
     @Accessors(chain = true)
-    @TableName("tb_user")
     public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-            @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+            /**
+            * 主键
+            */
+    private Long id;
 
-    private String userName;
-
-    private String password;
-
+            /**
+            * 姓名
+            */
     private String name;
 
+            /**
+            * 年龄
+            */
     private Integer age;
 
-    private Integer sex;
+            /**
+            * 邮箱
+            */
+    private String email;
 
-    private LocalDate birthday;
+            /**
+            * 直属上级id
+            */
+    private Long managerId;
 
-    private LocalDateTime created;
+            /**
+            * 创建时间
+            */
+    private LocalDateTime createTime;
 
-    private LocalDateTime updated;
+    private Integer version;
+
+    private String tenantId;
+
+            /**
+            * 逻辑删除
+            */
+    private Integer deleted;
+
+            /**
+            * 最后修改日期
+            */
+    private LocalDateTime updateTime;
 
 
 }

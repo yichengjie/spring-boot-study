@@ -5,14 +5,15 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.yicj.study.entity.User">
         <id column="id" property="id" />
-        <result column="user_name" property="userName" />
-        <result column="password" property="password" />
         <result column="name" property="name" />
         <result column="age" property="age" />
-        <result column="sex" property="sex" />
-        <result column="birthday" property="birthday" />
-        <result column="created" property="created" />
-        <result column="updated" property="updated" />
+        <result column="email" property="email" />
+        <result column="manager_id" property="managerId" />
+        <result column="create_time" property="createTime" />
+        <result column="version" property="version" />
+        <result column="tenant_id" property="tenantId" />
+        <result column="deleted" property="deleted" />
+        <result column="update_time" property="updateTime" />
     </resultMap>
 
 </mapper>

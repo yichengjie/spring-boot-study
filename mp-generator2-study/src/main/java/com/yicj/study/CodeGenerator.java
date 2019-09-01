@@ -64,8 +64,7 @@ public class CodeGenerator {
 		dsc.setDriverName("com.mysql.cj.jdbc.Driver");
 		dsc.setUsername("root");
 		dsc.setPassword("root");
-		dsc.setUrl(
-				"jdbc:mysql://localhost:3306/ssmdemo?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC");
+		dsc.setUrl("jdbc:mysql://localhost:3306/ssmdemo?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC");
 		mpg.setDataSource(dsc);
 
 		// 策略配置
@@ -73,7 +72,8 @@ public class CodeGenerator {
 		strategy.setTablePrefix(new String[] { "tb_" });// 此处可以修改为您的表前缀
 		strategy.setNaming(NamingStrategy.underline_to_camel);
 		strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-		strategy.setInclude(new String[] { "tb_user" }); // 需要生成的表
+		//strategy.setInclude(new String[] { "user" }); // 需要生成的表
+		strategy.setInclude(scanner("表名，多个英文逗号分割").split(",")) ;
 		//strategy.setSuperEntityClass("com.yicj.study.common.BaseEntity");
 		strategy.setSuperServiceClass(null);
 		strategy.setSuperServiceImplClass(null);

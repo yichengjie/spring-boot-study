@@ -1,6 +1,10 @@
 package com.yicj.study;
 
+import java.util.Scanner;
+
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
@@ -10,6 +14,27 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 public class CodeGenerator {
+	
+	/**
+	 * <p>
+	 * 读取控制台内容
+	 * </p>
+	 */
+	public static String scanner(String tip) {
+		Scanner scanner = new Scanner(System.in);
+		StringBuilder help = new StringBuilder();
+		help.append("请输入" + tip + "：");
+		System.out.println(help.toString());
+		if (scanner.hasNext()) {
+			String ipt = scanner.next();
+			if (StringUtils.isNotEmpty(ipt)) {
+				return ipt;
+			}
+		}
+		throw new MybatisPlusException("请输入正确的" + tip + "！");
+	}
+	
+	
 	public static void main(String[] args) {
 		AutoGenerator mpg = new AutoGenerator();
 		// set freemarker engine
@@ -62,13 +87,15 @@ public class CodeGenerator {
 
 		// 包配置
 		PackageConfig pc = new PackageConfig();
+		//模块名
+		//pc.setModuleName("user") ;
 		pc.setParent("com.yicj.study");
 		pc.setController("controller");
 		pc.setService("service");
 		pc.setServiceImpl("service.impl");
 		pc.setMapper("mapper");
 		pc.setEntity("entity");
-		pc.setXml("xml");
+		pc.setXml("mapper.xml");
 		mpg.setPackageInfo(pc);
 		// 执行生成
 		mpg.execute();

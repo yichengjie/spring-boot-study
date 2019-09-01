@@ -10,8 +10,8 @@ spring:
 
 #mybatis plus 设置
 mybatis-plus: 
-  mapper-locations: classpath*:mappers/*/*Mapper.xml
-  type-aliases-package: com.yicj.study.*.entity
+  mapper-locations: classpath*:com/yicj/study/xml/*Mapper.xml
+  type-aliases-package: com.yicj.study.entity
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false

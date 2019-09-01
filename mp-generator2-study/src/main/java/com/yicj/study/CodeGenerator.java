@@ -27,7 +27,7 @@ public class CodeGenerator {
 
 		// 自定义文件命名，注意 %s 会自动填充表实体属性！
 		gc.setControllerName("%sContrroller");
-		gc.setServiceName("%sService");
+		gc.setServiceName("I%sService");
 		gc.setServiceImplName("%sServiceImpl");
 		gc.setMapperName("%sMapper");
 		gc.setXmlName("%sMapper");
@@ -48,7 +48,7 @@ public class CodeGenerator {
 		strategy.setTablePrefix(new String[] { "tb_" });// 此处可以修改为您的表前缀
 		strategy.setNaming(NamingStrategy.underline_to_camel);
 		strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-		strategy.setInclude(new String[] { "tb_order" }); // 需要生成的表
+		strategy.setInclude(new String[] { "tb_user" }); // 需要生成的表
 		//strategy.setSuperEntityClass("com.yicj.study.common.BaseEntity");
 		strategy.setSuperServiceClass(null);
 		strategy.setSuperServiceImplClass(null);

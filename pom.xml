@@ -43,6 +43,7 @@
 		<module>mp-dynamic-table-study</module>
 		<module>mp-custom-method-study</module>	
 		<module>poi-simple-study</module>
+		<module>poi-middle-study</module>
 		<module>poi-advance-study</module>	
 	</modules>
 	

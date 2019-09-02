@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -21,6 +22,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -154,7 +156,6 @@ public class ExcelUtil {
 		List<BigDecimal> sumList = fieldsInfo.getSumList();
 		List<Boolean> isMergeList = fieldsInfo.getIsMergeList();
 		List<Method> mergeFlagList = fieldsInfo.getMergeFlagList();
-		
 		Method getMethod = methodList.get(columnIndex);
 		Object value;
 		if (convertMethodMap.containsKey(getMethod.getName())) {
@@ -176,16 +177,23 @@ public class ExcelUtil {
 				sumList.set(columnIndex, tempNum.add(new BigDecimal(1)));
 			}
 		}
-		// 合并列
+		// 合并列//判断当前列是否需要合并，如果需要合并
 		if (isMergeList.get(columnIndex)) {
 			String mergeValue;
+			//获取合并标志位的值
 			Method cm = mergeFlagList.get(columnIndex);
 			mergeValue = cm.invoke(obj, new Object[] {}).toString();
+			// poiModelMap {getName: PoiModel}
 			PoiModel poiModel = poiModelMap.get(getMethod.getName());
+			System.out.println("rowIndex : "+rowIndex +", columnIndex : "+ columnIndex +" , mergeValue : " + mergeValue);
+			//如果poiMode为空，则新建
 			if (poiModel == null) {
 				poiModel = new PoiModel();
+				//当前是第几行
 				poiModel.setRowIndex(rowIndex);
+				//合并列内容
 				poiModel.setContent(mergeValue);
+				//保存起来
 				poiModelMap.put(getMethod.getName(), poiModel);
 			} else {
 				// 判断值是否相等，不相等则合并
@@ -242,6 +250,7 @@ public class ExcelUtil {
 			// 设置单元格样色
 			CellStyle cellStyle = workbook.createCellStyle();
 			cellStyle.setVerticalAlignment(VerticalAlignment.CENTER) ;
+			
 			// 循环插入剩下的集合
 			List<Method> methodList = fieldsInfo.getMethodList();
 			List<Boolean> isSumList = fieldsInfo.getIsSumList();

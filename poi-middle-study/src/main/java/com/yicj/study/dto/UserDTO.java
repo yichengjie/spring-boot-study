@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class UserDTO {
 	private Integer id;
-	@ExcelConfig(exportName = "姓名")
+	@ExcelConfig(exportName = "姓名" ,exportMergeKey="id")
 	private String name;
-	@ExcelConfig(exportName = "性别", exportConvertSign = true)
+	@ExcelConfig(exportName = "性别", exportConvertFlag = true, exportMergeKey="id")
 	private Integer sex;
 	@ExcelConfig(exportName = "学科")
 	private String subject;

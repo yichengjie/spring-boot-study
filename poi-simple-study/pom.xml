@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>poi-simple-study</artifactId>
 	<properties>
-		<poi.version>4.1.0</poi.version>
+		<poi.version>4.0.1</poi.version>
 	</properties>
 
 	<dependencyManagement>
@@ -86,6 +86,7 @@
 		    <artifactId>poi</artifactId>
 		    <version>${poi.version}</version>
 		</dependency>
+		
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi-ooxml</artifactId>

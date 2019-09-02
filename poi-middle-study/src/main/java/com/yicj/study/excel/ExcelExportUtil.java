@@ -21,7 +21,6 @@ public class ExcelExportUtil {
 	/**
 	 * 生成导出Excel
 	 * @param title
-	 * @param pojoClass
 	 * @param dataSet
 	 * @param out
 	 */

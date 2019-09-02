@@ -15,7 +15,7 @@ public class ExcelExportUtilTest {
 	
 	@Test
 	public void testExportExcel() throws Exception {
-		String name = "D:\\opt\\applog\\excel\\" + System.currentTimeMillis()+".xls";
+		String name = "E:\\opt\\applog\\excel\\" + System.currentTimeMillis()+".xls";
         File file = new File(name);
         OutputStream outputStream = new FileOutputStream(file);
         try {
@@ -25,7 +25,7 @@ public class ExcelExportUtilTest {
             list.add(new UserDTO(2,"葫芦娃", 1, "Python", 50));
             list.add(new UserDTO(2,"葫芦娃", 1, "java", 44));
             list.add(new UserDTO(2,"葫芦娃", 1, "PHP", 66));
-            list.add(new UserDTO(3,"佩奇", 1, "Python", 77));
+            list.add(new UserDTO(3,"佩奇", 2, "Python", 77));
             list.add(new UserDTO(3,"佩奇", 1, "java", 54));
             list.add(new UserDTO(3,"佩奇", 1, "PHP", 82));
             list.add(new UserDTO(4,"乔治", 1, "Python", 63));
@@ -34,7 +34,9 @@ public class ExcelExportUtilTest {
             list.add(new UserDTO(5,"熊大", 1, "Python", 88));
             list.add(new UserDTO(5,"熊大", 1, "java", 91));
             list.add(new UserDTO(5,"熊大", 1, "PHP", 12));
-            ExcelExportUtil.exportExcel("测试", list, outputStream);
+            
+            
+            ExcelExportUtil.exportExcel("测试简单导出", list, outputStream);
 		} finally {
 			if(outputStream!=null) {
 				outputStream.close();

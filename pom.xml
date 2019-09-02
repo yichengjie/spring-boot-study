@@ -47,7 +47,7 @@
 		<module>poi-advance-study</module>	
 	</modules>
 	
-	<repositories>
+	<!--<repositories>
 		<repository>
 			<id>nexus-dbky</id>
 			<name>Nexus dbky</name>
@@ -59,7 +59,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-	</repositories>
+	</repositories>-->
 
 	<build>
 		<plugins>

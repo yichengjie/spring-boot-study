@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import com.yicj.study.dto.UserDTO;
 
-public class ExcelUtilTest {
+public class ExcelExportUtilTest {
 	
 	
 	@Test
@@ -34,7 +34,7 @@ public class ExcelUtilTest {
             list.add(new UserDTO(5,"熊大", 1, "Python", 88));
             list.add(new UserDTO(5,"熊大", 1, "java", 91));
             list.add(new UserDTO(5,"熊大", 1, "PHP", 12));
-            ExcelUtil.exportExcel("测试", UserDTO.class, list, outputStream);
+            ExcelExportUtil.exportExcel("测试", list, outputStream);
 		} finally {
 			if(outputStream!=null) {
 				outputStream.close();

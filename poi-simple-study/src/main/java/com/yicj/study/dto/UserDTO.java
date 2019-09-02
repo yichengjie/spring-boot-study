@@ -19,6 +19,7 @@ public class UserDTO {
 	private String subject;
 	@ExcelConfig(exportName = "分数")
 	private Integer score;
+	
 	public String getSexConvert() {
 		switch (sex) {
 		case 0:

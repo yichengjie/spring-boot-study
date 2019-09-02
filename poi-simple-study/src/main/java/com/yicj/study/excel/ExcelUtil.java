@@ -4,13 +4,9 @@ import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -20,7 +16,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.CellRangeAddress;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -37,8 +32,8 @@ public class ExcelUtil {
 		}
 	}
 	
-	private static FieldsInfo parseFieldsInfo(Class<?> pojoClass, Collection<?> dataSet) throws NoSuchMethodException, SecurityException {
-		FieldsInfo fieldsInfo = new FieldsInfo() ;
+	private static ExportFieldsInfo parseFieldsInfo(Class<?> pojoClass, Collection<?> dataSet) throws NoSuchMethodException, SecurityException {
+		ExportFieldsInfo fieldsInfo = new ExportFieldsInfo() ;
 		// 标题
 		List<String> exportFieldTitle = fieldsInfo.getTitleList() ;
 		List<Integer> exportFieldWidth = fieldsInfo.getWidthList() ;
@@ -48,14 +43,6 @@ public class ExcelUtil {
 		// 得到所有字段
 		Field[] fields = pojoClass.getDeclaredFields();
 		fieldsInfo.setFields(fields);
-		// 是否求和配置
-		boolean isSum = false;
-		List<BigDecimal> sumList = fieldsInfo.getSumList() ;
-		List<Boolean> isSumList = fieldsInfo.getIsSumList() ;
-		List<Integer> scaleList = fieldsInfo.getScaleList() ;
-		//是否合并
-		List<Boolean> isMergeList = fieldsInfo.getIsMergeList() ;
-		List<Method> mergeFlagList = fieldsInfo.getMergeFlagList() ;
 		// 遍历整个filed
 		for (int i = 0; i < fields.length; i++) {
 			Field field = fields[i];
@@ -82,49 +69,13 @@ public class ExcelUtil {
 					Method getConvertMethod = pojoClass.getMethod(getConvertMethodName.toString(), new Class[] {});
 					convertMethod.put(getMethodName.toString(), getConvertMethod);
 				}
-				// 记录是否求和配置
-				if (i != 0) {
-					if (excelConfig.isSum()) {
-						isSum = true;
-						log.debug(field.getName() + "需要合计");
-						isSumList.add(true);
-						sumList.add(new BigDecimal(0));
-						scaleList.add(excelConfig.scale());
-					} else {
-						isSumList.add(false);
-						sumList.add(null);
-						scaleList.add(null);
-					}
-				} else {
-					isSumList.add(false);
-					sumList.add(null);
-					scaleList.add(null);
-				}
-				// 是否合并
-				isMergeList.add(excelConfig.isMerge());
-				if (excelConfig.isMerge()) {
-					StringBuilder getMergeFlagName = new StringBuilder("get");
-					String mergeFlag;
-					if (StringUtils.isBlank(excelConfig.mergeFlag())) {
-						mergeFlag = getMethodName.toString();
-					} else {
-						getMergeFlagName.append(excelConfig.mergeFlag().substring(0, 1).toUpperCase())
-								.append(excelConfig.mergeFlag().substring(1));
-						mergeFlag = getMergeFlagName.toString();
-					}
-					Method getMergeFlag = pojoClass.getMethod(mergeFlag, new Class[] {});
-					mergeFlagList.add(getMergeFlag);
-				} else {
-					mergeFlagList.add(null);
-				}
 			}
 		}
-		fieldsInfo.setSum(isSum);
 		return fieldsInfo ;
 	}
 	
 	//产生表格标题
-	private static Row createExcelTitle(FieldsInfo fieldsInfo ,Sheet sheet) {
+	private static Row createExcelTitle(ExportFieldsInfo fieldsInfo ,Sheet sheet) {
 		// 产生表格标题行
 		List<String> titleList = fieldsInfo.getTitleList();
 		Row row = sheet.createRow(0);
@@ -136,7 +87,7 @@ public class ExcelUtil {
 		return row ;
 	}
 	//设置每行宽度
-	private static void initColumnsWidth(FieldsInfo fieldsInfo,Sheet sheet) {
+	private static void initColumnsWidth(ExportFieldsInfo fieldsInfo,Sheet sheet) {
 		List<Integer> widthList = fieldsInfo.getWidthList();
 		for (int i = 0; i < widthList.size(); i++) {
 			// 256=65280/255
@@ -144,16 +95,10 @@ public class ExcelUtil {
 		}
 	}
 	
-	private static void initCellValue(Sheet sheet,Cell cell,CellStyle cellStyle, 
-			int rowIndex, int columnIndex, FieldsInfo fieldsInfo,
-			Object obj ,Collection<?> dataSet,Map<String, PoiModel> poiModelMap)
+	private static void initCellValue(Cell cell, int columnIndex, ExportFieldsInfo fieldsInfo,Object obj)
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		List<Method> methodList = fieldsInfo.getMethodList();
 		Map<String, Method> convertMethodMap = fieldsInfo.getConvertMethodMap();
-		List<Boolean> isSumList = fieldsInfo.getIsSumList();
-		List<BigDecimal> sumList = fieldsInfo.getSumList();
-		List<Boolean> isMergeList = fieldsInfo.getIsMergeList();
-		List<Method> mergeFlagList = fieldsInfo.getMergeFlagList();
 		
 		Method getMethod = methodList.get(columnIndex);
 		Object value;
@@ -164,57 +109,6 @@ public class ExcelUtil {
 			value = getMethod.invoke(obj, new Object[] {});
 		}
 		cell.setCellValue(value == null ? "" : value.toString());
-		// 合计计算操作
-		if (isSumList.get(columnIndex)) {
-			BigDecimal tempNum = sumList.get(columnIndex);
-			if (value instanceof Number) {
-				sumList.set(columnIndex, tempNum.add(new BigDecimal(value.toString())));
-			} else if (value instanceof String) {
-				sumList.set(columnIndex, tempNum.add(new BigDecimal(1)));
-			} else {
-				log.warn("未知合计类型" + value.toString());
-				sumList.set(columnIndex, tempNum.add(new BigDecimal(1)));
-			}
-		}
-		// 合并列
-		if (isMergeList.get(columnIndex)) {
-			String mergeValue;
-			Method cm = mergeFlagList.get(columnIndex);
-			mergeValue = cm.invoke(obj, new Object[] {}).toString();
-			PoiModel poiModel = poiModelMap.get(getMethod.getName());
-			if (poiModel == null) {
-				poiModel = new PoiModel();
-				poiModel.setRowIndex(rowIndex);
-				poiModel.setContent(mergeValue);
-				poiModelMap.put(getMethod.getName(), poiModel);
-			} else {
-				// 判断值是否相等，不相等则合并
-				if (!poiModel.getContent().equals(mergeValue)) {
-					// 合并单元格必须是2个或以上
-					if (poiModel.getRowIndex() != (rowIndex - 1)) {
-						CellRangeAddress cra = new CellRangeAddress(poiModel.getRowIndex(), 
-								rowIndex - 1, columnIndex,columnIndex);
-						sheet.addMergedRegion(cra);
-						sheet.getRow(poiModel.getRowIndex()).getCell(columnIndex).setCellStyle(cellStyle);
-					}
-					poiModel.setContent(mergeValue);
-					poiModel.setRowIndex(rowIndex);
-					poiModelMap.put(getMethod.getName(), poiModel);
-				} else {
-					// 最后一行无法在进行比较，直接合并
-					if (rowIndex == dataSet.size()) {
-						if (poiModel.getRowIndex() != rowIndex) {
-							CellRangeAddress cra = new CellRangeAddress(poiModel.getRowIndex(), 
-									rowIndex, columnIndex,columnIndex);
-							sheet.addMergedRegion(cra);
-							sheet.getRow(poiModel.getRowIndex())
-							.getCell(columnIndex).setCellStyle(cellStyle);
-						}
-					}
-				}
-			}
-		}
-		
 	}
 	
 	/**
@@ -225,8 +119,7 @@ public class ExcelUtil {
 	 * @param out
 	 */
 	public static void exportExcel(String title, Class<?> pojoClass, 
-			Collection<?> dataSet, 
-			OutputStream out) {
+			Collection<?> dataSet, OutputStream out) {
 		try {
 			//首先检查数据看是否是正确的
 			checkDataValid(title, pojoClass, dataSet, out);
@@ -234,7 +127,7 @@ public class ExcelUtil {
 			Workbook workbook = new HSSFWorkbook();
 			// 生成一个表格
 			Sheet sheet = workbook.createSheet(title);
-			FieldsInfo fieldsInfo = parseFieldsInfo(pojoClass, dataSet);
+			ExportFieldsInfo fieldsInfo = parseFieldsInfo(pojoClass, dataSet);
 			//产生表格标题行
 			Row row = createExcelTitle(fieldsInfo, sheet) ;
 			// 设置每行的列宽
@@ -244,37 +137,20 @@ public class ExcelUtil {
 			cellStyle.setVerticalAlignment(VerticalAlignment.CENTER) ;
 			// 循环插入剩下的集合
 			List<Method> methodList = fieldsInfo.getMethodList();
-			List<Boolean> isSumList = fieldsInfo.getIsSumList();
-			List<BigDecimal> sumList = fieldsInfo.getSumList();
-			boolean isSum = fieldsInfo.isSum();
-			List<Integer> scaleList = fieldsInfo.getScaleList();
-			int rowIndex = 0;
-			HashMap<String, PoiModel> poiModelMap = new HashMap<>();
+			int rowIndex = 1;
 			for(Object obj: dataSet) {
-				rowIndex++;
 				// 从第二行开始写，第一行是标题
 				row = sheet.createRow(rowIndex);
-				for (int i = 0; i < methodList.size(); i++) {
-					Cell cell = row.createCell(i);
-					initCellValue(sheet, cell, cellStyle, rowIndex, i, 
-							fieldsInfo, obj, dataSet, poiModelMap);
+				for (int columnIndex = 0; columnIndex < methodList.size(); columnIndex++) {
+					Cell cell = row.createCell(columnIndex);
+					initCellValue(cell, columnIndex, fieldsInfo, obj);
 				}
-			}
-			// 合计行显示操作
-			if (isSum) {
-				row = sheet.createRow(++rowIndex);
-				row.createCell(0).setCellValue("合计");
-				for (int k = 0; k < isSumList.size(); k++) {
-					if (isSumList.get(k)) {
-						Cell cell = row.createCell(k);
-						cell.setCellValue((sumList.get(k).setScale(scaleList.get(k), 
-								RoundingMode.HALF_UP)).toString());
-					}
-				}
+				rowIndex++;
 			}
 			workbook.write(out);
 		} catch (Exception e) {
 			log.error("Excel导出失败：", e);
+			throw new RuntimeException("Excel导出失败：", e) ;
 		}
 	}
 

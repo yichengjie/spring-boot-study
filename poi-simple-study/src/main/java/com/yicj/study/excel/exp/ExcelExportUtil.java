@@ -1,4 +1,4 @@
-package com.yicj.study.excel;
+package com.yicj.study.excel.exp;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -77,17 +77,18 @@ public class ExcelExportUtil {
 	 * @throws NoSuchMethodException
 	 * @throws SecurityException
 	 */
-	private static List<ExportFieldInfo> parseExportFieldInfo(Class<?> dataClass)
+	private static List<ExportFieldInfo> parseExportFieldInfo(Class<?> clazz)
 			throws NoSuchMethodException, SecurityException {
 		List<ExportFieldInfo> fieldInfos = new ArrayList<ExportFieldInfo>();
 		// 得到所有字段
-		Field[] fields = dataClass.getDeclaredFields();
+		Field[] fields = clazz.getDeclaredFields();
 		// 遍历整个filed
 		for (Field field : fields) {
 			ExportConf excelConfig = field.getAnnotation(ExportConf.class);
 			// 如果设置了annotation
 			if (excelConfig != null) {
 				ExportFieldInfo info = new ExportFieldInfo();
+				info.setName(field.getName());
 				int index = excelConfig.index() ;//第几列
 				info.setIndex(index);
 				String title = excelConfig.title();// 添加到标题
@@ -96,13 +97,10 @@ public class ExcelExportUtil {
 				info.setWidth(width);
 				String fieldName = field.getName();// 添加到需要导出的字段的方法
 				log.debug(title + " " + "列宽" + width);
-				String getterMethodName = getGetterMethodNameByFieldName(fieldName);
-				Method getterMethod = dataClass.getMethod(getterMethodName, new Class[] {});
+				Method getterMethod = getGetterMethodByFieldName(fieldName, clazz) ;
 				info.setGetterMethod(getterMethod);
 				if (excelConfig.isConvert()) {
-					String convertMethodName = getConvertMethodNameByFieldName(fieldName);
-					log.debug("convert method name : " + convertMethodName);
-					Method convertMethod = dataClass.getMethod(convertMethodName, new Class[] {});
+					Method convertMethod = getConvertMethodByFieldName(fieldName, clazz) ;
 					info.setConvertMethod(convertMethod);
 				}
 				fieldInfos.add(info);
@@ -112,18 +110,28 @@ public class ExcelExportUtil {
 	}
 
 	//通过字段名获取get方法名称 : getXXX
-	private static String getGetterMethodNameByFieldName(String fieldName) {
-		StringBuffer getterMethodName = new StringBuffer("get");
-		getterMethodName.append(fieldName.substring(0, 1).toUpperCase()).append(fieldName.substring(1));
-		return getterMethodName.toString();
+	private static Method getGetterMethodByFieldName(String fieldName,Class<?> clazz) {
+		StringBuffer methodName = new StringBuffer("get");
+		try {
+			methodName.append(fieldName.substring(0, 1).toUpperCase()).append(fieldName.substring(1));
+			Method getterMethod = clazz.getMethod(methodName.toString(), new Class[] {});
+			return getterMethod ;
+		} catch (Exception e) {
+			throw new RuntimeException("获取" + methodName.toString() +"方法报错!",e) ;
+		}
 	}
 
 	//通过字段名获取conver方法名称: getXXXConvert
-	private static String getConvertMethodNameByFieldName(String fieldName) {
-		StringBuilder getConvertMethodName = new StringBuilder("get");
-		getConvertMethodName.append(fieldName.substring(0, 1).toUpperCase()).append(fieldName.substring(1))
-				.append("Convert");
-		return getConvertMethodName.toString();
+	private static Method getConvertMethodByFieldName(String fieldName,Class<?> clazz) {
+		StringBuilder methodName = new StringBuilder("get");
+		try {
+			methodName.append(fieldName.substring(0, 1).toUpperCase()).
+				append(fieldName.substring(1)).append("Convert");
+			Method method = clazz.getMethod(methodName.toString(), new Class[] {});
+			return method ;
+		} catch (Exception e) {
+			throw new RuntimeException("获取" + methodName.toString() +"方法报错!",e) ;
+		}
 	}
 
 	// 产生表格标题

@@ -84,20 +84,20 @@ public class ExcelExportUtil {
 		Field[] fields = dataClass.getDeclaredFields();
 		// 遍历整个filed
 		for (Field field : fields) {
-			ExcelConfig excelConfig = field.getAnnotation(ExcelConfig.class);
+			ExportConf excelConfig = field.getAnnotation(ExportConf.class);
 			// 如果设置了annotation
 			if (excelConfig != null) {
 				ExportFieldInfo info = new ExportFieldInfo();
-				String title = excelConfig.exportName();// 添加到标题
+				String title = excelConfig.title();// 添加到标题
 				info.setTitle(title);
-				int width = excelConfig.exportFieldWidth();// 添加标题的列宽
+				int width = excelConfig.width();// 添加标题的列宽
 				info.setWidth(width);
 				String fieldName = field.getName();// 添加到需要导出的字段的方法
 				log.debug(title + " " + "列宽" + width);
 				String getterMethodName = getGetterMethodNameByFieldName(fieldName);
 				Method getterMethod = dataClass.getMethod(getterMethodName, new Class[] {});
 				info.setGetterMethod(getterMethod);
-				if (excelConfig.exportConvertSign()) {
+				if (excelConfig.isConvert()) {
 					String convertMethodName = getConvertMethodNameByFieldName(fieldName);
 					log.debug("convert method name : " + convertMethodName);
 					Method convertMethod = dataClass.getMethod(convertMethodName, new Class[] {});

@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 public class ExportFieldInfo{
+	private Integer index ;
 	private Field   field ;
 	private String  title ;
 	private Integer width ;

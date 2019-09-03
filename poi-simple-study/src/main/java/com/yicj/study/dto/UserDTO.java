@@ -11,13 +11,13 @@ import lombok.NoArgsConstructor;
 @Data
 public class UserDTO {
 	private Integer id;
-	@ExportConf(title = "姓名")
+	@ExportConf(index=0, title = "姓名")
 	private String name;
-	@ExportConf(title = "性别", isConvert = true)
+	@ExportConf(index =1, title = "性别", isConvert = true)
 	private Integer sex;
-	@ExportConf(title = "学科")
+	@ExportConf(index =2, title = "学科")
 	private String subject;
-	@ExportConf(title = "分数")
+	@ExportConf(index= 3, title = "分数")
 	private Integer score;
 	
 	public String getSexConvert() {

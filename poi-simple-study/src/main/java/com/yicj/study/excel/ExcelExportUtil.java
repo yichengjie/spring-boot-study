@@ -88,6 +88,8 @@ public class ExcelExportUtil {
 			// 如果设置了annotation
 			if (excelConfig != null) {
 				ExportFieldInfo info = new ExportFieldInfo();
+				int index = excelConfig.index() ;//第几列
+				info.setIndex(index);
 				String title = excelConfig.title();// 添加到标题
 				info.setTitle(title);
 				int width = excelConfig.width();// 添加标题的列宽
@@ -127,9 +129,8 @@ public class ExcelExportUtil {
 	// 产生表格标题
 	private static Row createTitleRow(Sheet sheet, List<ExportFieldInfo> fieldInfos) {
 		Row row = sheet.createRow(0);// 产生表格标题行
-		for (int i = 0; i < fieldInfos.size(); i++) {
-			Cell cell = row.createCell(i);
-			ExportFieldInfo info = fieldInfos.get(i);
+		for (ExportFieldInfo info : fieldInfos) {
+			Cell cell = row.createCell(info.getIndex());
 			RichTextString text = new HSSFRichTextString(info.getTitle());
 			cell.setCellValue(text);
 		}
@@ -151,10 +152,9 @@ public class ExcelExportUtil {
 		// 创建excel中的一行
 		Row row = sheet.createRow(rowIndex);
 		try {
-			for (int i = 0; i < fieldInfos.size(); i++) {
-				ExportFieldInfo info = fieldInfos.get(i);
+			for (ExportFieldInfo info: fieldInfos) {
 				// 填充行中的每一个单元格
-				Cell cell = row.createCell(i);
+				Cell cell = row.createCell(info.getIndex());
 				Object value = null;
 				if (info.getConvertMethod() != null) {
 					value = info.getConvertMethod().invoke(dataObject, new Object[] {});

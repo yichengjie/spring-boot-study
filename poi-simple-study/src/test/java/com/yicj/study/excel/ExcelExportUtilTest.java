@@ -15,7 +15,7 @@ public class ExcelExportUtilTest {
 	
 	@Test
 	public void testExportExcel() throws Exception {
-		String name = "E:\\opt\\applog\\excel\\" + System.currentTimeMillis()+".xls";
+		String name = "D:\\opt\\applog\\excel\\" + System.currentTimeMillis()+".xls";
         File file = new File(name);
         OutputStream outputStream = new FileOutputStream(file);
         try {

@@ -10,6 +10,11 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface ExportConf {
 	/**
+	 * 索引:第几列
+	 * @return
+	 */
+	public int index();
+	/**
 	 * 导入时，对应数据库的字段 主要是用户区分每个字段，不能有annotation重名的 导出时的列名 导出排序跟定义了annotation的字段的顺序有关
 	 * @return 列名
 	 */

@@ -47,19 +47,6 @@
 		<module>poi-advance-study</module>	
 	</modules>
 	
-	<repositories>
-		<repository>
-			<id>nexus-dbky</id>
-			<name>Nexus dbky</name>
-			<url>http://172.22.57.220:8081/nexus/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 
 	<build>
 		<plugins>

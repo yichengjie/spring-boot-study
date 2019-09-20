@@ -11,20 +11,6 @@
 	<artifactId>mybatis-plus-study</artifactId>
 	
 	
-	<repositories>
-		<repository>
-			<id>nexus-dbky</id>
-			<name>Nexus dbky</name>
-			<url>http://172.22.57.220:8081/nexus/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

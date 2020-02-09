@@ -8,6 +8,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.yicj.mybatis.entity.Order;
 
+import lombok.extern.slf4j.Slf4j;
+
 //目标：测试一下spring的bean的某些功能
 @RunWith(SpringJUnit4ClassRunner.class) // junit整合spring的测试//立马开启了spring的注解
 @ContextConfiguration(locations = "classpath:spring/applicationContext-*.xml") // 加载核心配置文件，自动构建spring容器

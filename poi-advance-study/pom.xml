@@ -7,7 +7,7 @@
 		<artifactId>spring-boot-study</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>poi-simple-study</artifactId>
+	<artifactId>poi-advance-study</artifactId>
 	<properties>
 		<poi.version>4.0.1</poi.version>
 	</properties>

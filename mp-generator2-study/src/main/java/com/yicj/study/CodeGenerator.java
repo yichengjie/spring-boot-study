@@ -87,6 +87,13 @@ public class CodeGenerator {
 
 		// 包配置
 		PackageConfig pc = new PackageConfig();
+        //注意如果这里设置moduleName后则按照模块结构生成代码
+        // --logs
+        // ------controller/
+        // ------service/
+        // ------mapper
+        //如果不设置则不会加上模块结构
+        //pc.setModuleName(CommonGen.scanner("模块名"));
 		//模块名
 		//pc.setModuleName("user") ;
 		pc.setParent("com.yicj.study");

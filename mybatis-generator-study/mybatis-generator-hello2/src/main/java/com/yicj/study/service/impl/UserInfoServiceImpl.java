@@ -20,8 +20,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public UserModel getUserById(Integer id) {
         UserDO userDO = userDOMapper.selectByPrimaryKey(id);
-        //UserPasswordDO passwordDO = userPasswordDOMapper.selectByUserId(userDO.getId());
-        return convertFromDataObject(userDO,null) ;
+        UserPasswordDO passwordDO = userPasswordDOMapper.selectByUserId(userDO.getId());
+        return convertFromDataObject(userDO,passwordDO) ;
     }
 
 

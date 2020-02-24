@@ -26,6 +26,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 
     private UserModel convertFromDataObject(UserDO userDO, UserPasswordDO passwordDO){
+        if(userDO ==null){
+            return null ;
+        }
         UserModel model = new UserModel() ;
         BeanUtils.copyProperties(userDO,model);
         if(passwordDO != null){

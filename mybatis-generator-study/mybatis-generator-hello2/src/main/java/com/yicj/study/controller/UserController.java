@@ -1,6 +1,9 @@
 package com.yicj.study.controller;
 
 import com.yicj.study.controller.vo.UserVo;
+import com.yicj.study.error.BusinessException;
+import com.yicj.study.error.EmBusinessError;
+import com.yicj.study.response.CommonReturnType;
 import com.yicj.study.service.model.UserModel;
 import com.yicj.study.service.UserInfoService;
 import org.springframework.beans.BeanUtils;
@@ -18,9 +21,12 @@ public class UserController {
     private UserInfoService userInfoService ;
 
     @GetMapping("/getUser")
-    public UserVo getUser(@RequestParam("id") Integer id){
+    public CommonReturnType getUser(@RequestParam("id") Integer id) throws BusinessException {
         UserModel userModel = userInfoService.getUserById(id);
-        return this.convertFromModel(userModel);
+        if (userModel == null){
+            throw new BusinessException(EmBusinessError.USER_NOT_EXIST) ;
+        }
+        return CommonReturnType.success(this.convertFromModel(userModel)) ;
     }
 
 

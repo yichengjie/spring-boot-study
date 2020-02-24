@@ -13,7 +13,8 @@
 
 	<modules>
 		<module>mybatis-generator-hello</module>
-	</modules>
+        <module>mybatis-generator-hello2</module>
+    </modules>
 
 
 

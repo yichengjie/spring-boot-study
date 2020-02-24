@@ -44,8 +44,9 @@
 		<module>mp-custom-method-study</module>	
 		<module>poi-simple-study</module>
 		<module>poi-middle-study</module>
-		<module>poi-advance-study</module>	
-	</modules>
+		<module>poi-advance-study</module>
+        <module>miao-sha-study</module>
+    </modules>
 	
 
 	<build>

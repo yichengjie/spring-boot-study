@@ -19,6 +19,7 @@ import java.util.Random;
 @Controller("user")
 @RequestMapping("/user")
 @Slf4j
+@CrossOrigin //支持跨域
 public class UserController extends BaseController {
 
     @Autowired
@@ -29,7 +30,8 @@ public class UserController extends BaseController {
     private HttpServletRequest httpServletRequest ;
 
     //用户获取otp短信接口
-    @GetMapping("/getOtp")
+    //consumes对应的后端提供前端的contentType需要消费的一个名字
+    @GetMapping(value = "/getOtp",consumes = {"application/x-www-form-urlencoded"})
     @ResponseBody
     public CommonReturnType getOtp(@RequestParam(name = "telephone") String telephone){
         //需要按照一定规则生成otp验证码

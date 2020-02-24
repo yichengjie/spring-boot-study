@@ -4,9 +4,17 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <!--<classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
+    <!-- 数据库驱动包位置,路径请不要有中文 -->
+    <!--<classPathEntry location="D:\software\lib\mysql-connector-java-5.1.21.jar" />-->
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <!-- 注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
+            <!-- <property name="suppressDate" value="true" /> 是否生成注释代时间戳 -->
+        </commentGenerator>
+
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/ssmdemo"
                         userId="root"

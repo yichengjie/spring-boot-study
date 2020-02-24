@@ -1,7 +1,9 @@
 package com.yicj.study.controller;
 
-import com.yicj.study.model.UserModel;
+import com.yicj.study.controller.vo.UserVo;
+import com.yicj.study.service.model.UserModel;
 import com.yicj.study.service.UserInfoService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +18,15 @@ public class UserController {
     private UserInfoService userInfoService ;
 
     @GetMapping("/getUser")
-    public UserModel getUser(@RequestParam("id") Integer id){
+    public UserVo getUser(@RequestParam("id") Integer id){
         UserModel userModel = userInfoService.getUserById(id);
-        return userModel;
+        return this.convertFromModel(userModel);
+    }
+
+
+    private UserVo convertFromModel(UserModel userModel){
+        UserVo userVo = new UserVo() ;
+        BeanUtils.copyProperties(userModel,userVo);
+        return userVo ;
     }
 }

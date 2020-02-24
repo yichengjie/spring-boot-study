@@ -4,7 +4,7 @@ import com.yicj.study.dao.UserDOMapper;
 import com.yicj.study.dao.UserPasswordDOMapper;
 import com.yicj.study.entity.UserDO;
 import com.yicj.study.entity.UserPasswordDO;
-import com.yicj.study.model.UserModel;
+import com.yicj.study.service.model.UserModel;
 import com.yicj.study.service.UserInfoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

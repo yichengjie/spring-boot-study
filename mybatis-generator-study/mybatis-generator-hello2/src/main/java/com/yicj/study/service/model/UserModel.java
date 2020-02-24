@@ -1,4 +1,4 @@
-package com.yicj.study.model;
+package com.yicj.study.service.model;
 
 import lombok.Data;
 

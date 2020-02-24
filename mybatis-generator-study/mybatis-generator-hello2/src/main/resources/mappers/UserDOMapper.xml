@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yicj.study.dao.UserInfoMapper">
-  <resultMap id="BaseResultMap" type="com.yicj.study.entity.UserInfo">
+<mapper namespace="com.yicj.study.dao.UserDOMapper">
+  <resultMap id="BaseResultMap" type="com.yicj.study.entity.UserDO">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="gendeer" jdbcType="BIT" property="gendeer" />
+    <result column="gender" jdbcType="BIT" property="gender" />
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="telephone" jdbcType="VARCHAR" property="telephone" />
     <result column="register_mode" jdbcType="VARCHAR" property="registerMode" />
     <result column="third_part_id" jdbcType="VARCHAR" property="thirdPartId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, gendeer, age, telephone, register_mode, third_part_id
+    id, name, gender, age, telephone, register_mode, third_part_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -23,15 +23,15 @@
     delete from user_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.yicj.study.entity.UserInfo">
-    insert into user_info (id, name, gendeer, 
+  <insert id="insert" parameterType="com.yicj.study.entity.UserDO">
+    insert into user_info (id, name, gender, 
       age, telephone, register_mode, 
       third_part_id)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gendeer,jdbcType=BIT}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=BIT}, 
       #{age,jdbcType=INTEGER}, #{telephone,jdbcType=VARCHAR}, #{registerMode,jdbcType=VARCHAR}, 
       #{thirdPartId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.yicj.study.entity.UserInfo">
+  <insert id="insertSelective" parameterType="com.yicj.study.entity.UserDO">
     insert into user_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -40,8 +40,8 @@
       <if test="name != null">
         name,
       </if>
-      <if test="gendeer != null">
-        gendeer,
+      <if test="gender != null">
+        gender,
       </if>
       <if test="age != null">
         age,
@@ -63,8 +63,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="gendeer != null">
-        #{gendeer,jdbcType=BIT},
+      <if test="gender != null">
+        #{gender,jdbcType=BIT},
       </if>
       <if test="age != null">
         #{age,jdbcType=INTEGER},
@@ -80,14 +80,14 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yicj.study.entity.UserInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.yicj.study.entity.UserDO">
     update user_info
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="gendeer != null">
-        gendeer = #{gendeer,jdbcType=BIT},
+      <if test="gender != null">
+        gender = #{gender,jdbcType=BIT},
       </if>
       <if test="age != null">
         age = #{age,jdbcType=INTEGER},
@@ -104,10 +104,10 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yicj.study.entity.UserInfo">
+  <update id="updateByPrimaryKey" parameterType="com.yicj.study.entity.UserDO">
     update user_info
     set name = #{name,jdbcType=VARCHAR},
-      gendeer = #{gendeer,jdbcType=BIT},
+      gender = #{gender,jdbcType=BIT},
       age = #{age,jdbcType=INTEGER},
       telephone = #{telephone,jdbcType=VARCHAR},
       register_mode = #{registerMode,jdbcType=VARCHAR},

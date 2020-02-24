@@ -1,6 +1,6 @@
 package com.yicj.study.entity;
 
-public class UserPassword {
+public class UserPasswordDO {
     private Integer id;
 
     private String encrptPassword;

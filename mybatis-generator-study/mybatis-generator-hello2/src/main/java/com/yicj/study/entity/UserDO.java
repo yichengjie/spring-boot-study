@@ -1,11 +1,11 @@
 package com.yicj.study.entity;
 
-public class UserInfo {
+public class UserDO {
     private Integer id;
 
     private String name;
 
-    private Boolean gendeer;
+    private Boolean gender;
 
     private Integer age;
 
@@ -31,12 +31,12 @@ public class UserInfo {
         this.name = name == null ? null : name.trim();
     }
 
-    public Boolean getGendeer() {
-        return gendeer;
+    public Boolean getGender() {
+        return gender;
     }
 
-    public void setGendeer(Boolean gendeer) {
-        this.gendeer = gendeer;
+    public void setGender(Boolean gender) {
+        this.gender = gender;
     }
 
     public Integer getAge() {

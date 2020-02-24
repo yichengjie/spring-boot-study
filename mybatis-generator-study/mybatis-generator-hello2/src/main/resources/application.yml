@@ -3,3 +3,20 @@ server:
 
 mybatis:
   mapper-locations: classpath:mappers/*Mapper.xml
+
+
+spring:
+  datasource:
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ssmdemo
+    name: ssmdemo
+    username: root
+    password: root
+
+
+logging:
+  level:
+    root: info
+    com.yicj.study.dao: trace

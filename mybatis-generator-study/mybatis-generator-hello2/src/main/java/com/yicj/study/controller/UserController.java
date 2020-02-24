@@ -8,19 +8,19 @@ import com.yicj.study.service.model.UserModel;
 import com.yicj.study.service.UserInfoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("user")
+
+@Controller("user")
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     private UserInfoService userInfoService ;
 
     @GetMapping("/getUser")
+    @ResponseBody
     public CommonReturnType getUser(@RequestParam("id") Integer id) throws BusinessException {
         UserModel userModel = userInfoService.getUserById(id);
         if (userModel == null){
@@ -35,4 +35,5 @@ public class UserController {
         BeanUtils.copyProperties(userModel,userVo);
         return userVo ;
     }
+
 }

@@ -11,6 +11,7 @@ import com.yicj.study.service.UserInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,15 +42,36 @@ public class UserInfoServiceImpl implements UserInfoService {
                 model.getGender() == null ||
                 model.getAge() == null ||
                 StringUtils.isEmpty(model.getTelephone())){
-            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR)
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR) ;
         }
         //实现model - > do方法
         UserDO userDO = converUserDOtFromModel(model) ;
-        userDOMapper.insertSelective(userDO) ;
+        try {
+            userDOMapper.insertSelective(userDO) ;
+        }catch (DuplicateKeyException ex){
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"手机号已重复注册") ;
+        }
+
         //赋值给model
         model.setId(userDO.getId());
         UserPasswordDO passwordDO = convertPasswordDOFromModel(model);
         userPasswordDOMapper.insertSelective(passwordDO) ;
+    }
+
+    @Override
+    public UserModel validateLogin(String telephone, String encrptPassword) throws BusinessException {
+        //通过用户手机获取用户登录信息
+        UserDO userDO = userDOMapper.selectByTelephone(telephone);
+        if(userDO ==null){
+            throw new BusinessException(EmBusinessError.USER_LOGIN_FAIL) ;
+        }
+        UserPasswordDO passwordDO = userPasswordDOMapper.selectByUserId(userDO.getId());
+        UserModel model = convertFromDataObject(userDO, passwordDO);
+        //比对用户传入的密码与数据库中的密码是否一样
+        if (com.alibaba.druid.util.StringUtils.equals(passwordDO.getEncrptPassword(),encrptPassword)){
+            throw new BusinessException(EmBusinessError.USER_LOGIN_FAIL) ;
+        }
+        return model ;
     }
 
     private UserDO converUserDOtFromModel(UserModel model){

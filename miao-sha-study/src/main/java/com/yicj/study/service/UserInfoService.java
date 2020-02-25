@@ -8,4 +8,6 @@ public interface UserInfoService {
     UserModel getUserById(Integer id) ;
 
     void register(UserModel model) throws BusinessException;
+
+    UserModel validateLogin(String telephone,String encrptPassword) throws BusinessException;
 }

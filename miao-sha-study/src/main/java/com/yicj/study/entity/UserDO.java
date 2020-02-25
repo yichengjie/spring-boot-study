@@ -5,7 +5,7 @@ public class UserDO {
 
     private String name;
 
-    private Boolean gender;
+    private Integer gender;
 
     private Integer age;
 
@@ -31,11 +31,11 @@ public class UserDO {
         this.name = name == null ? null : name.trim();
     }
 
-    public Boolean getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(Boolean gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 

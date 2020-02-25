@@ -6,7 +6,7 @@ import lombok.Data;
 public class UserModel {
     private Integer id;
     private String name;
-    private Boolean gender;
+    private Integer gender;
     private Integer age;
     private String telephone;
     private String registerMode;

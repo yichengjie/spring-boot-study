@@ -8,6 +8,8 @@ import com.yicj.study.error.BusinessException;
 import com.yicj.study.error.EmBusinessError;
 import com.yicj.study.service.model.UserModel;
 import com.yicj.study.service.UserInfoService;
+import com.yicj.study.validator.ValidationResult;
+import com.yicj.study.validator.ValidatorImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,17 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.validation.Validator;
+
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     private UserDOMapper userDOMapper ;
     @Autowired
     private UserPasswordDOMapper userPasswordDOMapper ;
+
+    @Autowired
+    private ValidatorImpl validator ;
 
     @Override
     public UserModel getUserById(Integer id) {
@@ -38,12 +45,13 @@ public class UserInfoServiceImpl implements UserInfoService {
         if (model == null){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR) ;
         }
-        if(StringUtils.isEmpty(model.getName()) ||
-                model.getGender() == null ||
-                model.getAge() == null ||
-                StringUtils.isEmpty(model.getTelephone())){
-            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR) ;
+
+        ValidationResult result = validator.validate(model);
+        if(result.isHasErrors()){
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,
+                    result.getErrMsg()) ;
         }
+
         //实现model - > do方法
         UserDO userDO = converUserDOtFromModel(model) ;
         try {

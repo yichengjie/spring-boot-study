@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>poi-middle-study</artifactId>
 	<properties>
-		<poi.version>4.0.1</poi.version>
+		<poi.version>4.1.1</poi.version>
 	</properties>
 
 	<dependencyManagement>
